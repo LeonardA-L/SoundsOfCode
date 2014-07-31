@@ -1,56 +1,83 @@
 package theundyingcarpet;
 
- import com.jsyn.*;          // JSyn and Synthesizer classes
-import com.jsyn.swing.*;    // Swing tools like knobs and JAppletFrame
+import com.jsyn.*; // JSyn and Synthesizer classes
 import com.jsyn.unitgen.*;
 
-import com.softsynth.jsyn.Synth; // Unit generators like SineOscillator
 
-public class theUndyingCarpet{
-	public static void main(String[] args){
-		System.out.println("Hellow World");
-                SawtoothOscillatorBL osc;
-	        LineOut lineOut;
-	        // Start JSyn synthesizer.
-                Synthesizer synth = JSyn.createSynthesizer();
-                synth.start();
+public class TheUndyingCarpet {
+    
+    public static LineOut lineOut;
+    public static Synthesizer synth;
+    
+    public static void main(String[] args) {
+        int totalDuration = 5;
+        
+        synth = JSyn.createSynthesizer();
+        synth.start();
+        lineOut = new LineOut();
+        synth.add(lineOut);
+        lineOut.start();
+        /*
+        SawtoothOscillatorBL osc;
+        SawtoothOscillatorBL osc2;
+        // Start JSyn synthesizer.
+        Synthesizer synth = JSyn.createSynthesizer();
+        synth.start();
 
-	        // Create some unit generators.
-	        osc = new SawtoothOscillatorBL();
-	        lineOut = new LineOut();
-                
-                synth.add(osc);
-                synth.add(lineOut);
+        // Create some unit generators.
+        osc = new SawtoothOscillatorBL();
+        osc2 = new SawtoothOscillatorBL();
+        
 
-	        // Connect oscillator to both left and right channels of output.
-	        osc.output.connect(0, lineOut.input, 0);
-	        osc.output.connect(0, lineOut.input, 1);
+        synth.add(osc);
+        synth.add(osc2);
+        synth.add(lineOut);
 
-	        // Start the unit generators so they make sound.
-	        osc.start();
-	        lineOut.start();
+        // Connect oscillator to both left and right channels of output.
+        osc.output.connect(0, lineOut.input, 0);
+        osc.output.connect(0, lineOut.input, 1);
+        osc2.output.connect(0, lineOut.input, 0);
+        osc2.output.connect(0, lineOut.input, 1);
 
-	        // Set the frequency of the oscillator to 200 Hz.
-	        osc.frequency.set(200.0);
-	        osc.amplitude.set(0.8);
+        // Start the unit generators so they make sound.
+        osc.start();
+        osc2.start();
+        
 
-	        // Sleep for awhile so we can hear the sound.
-	        try {
-	            synth.sleepFor(4);
-	        } catch (InterruptedException e) {
-	        }
-                // Change the frequency of the oscillator.
-                osc.frequency.set(300.0);
-                try {
-                    synth.sleepFor(4);
-                } catch (InterruptedException e) {
-                }
+        // Set the frequency of the oscillator to 200 Hz.
+        osc.frequency.set(200.0);
+        osc.amplitude.set(0.4);
+        osc2.frequency.set(300.0);
+        osc2.amplitude.set(0.4);
 
-	        // Stop units and delete them to reclaim their resources.
-	        osc.stop();
-	        lineOut.stop();
-
-	        // Stop JSyn synthesizer.
-	        synth.stop();
-	}
+        // Sleep for awhile so we can hear the sound.
+        try {
+            synth.sleepFor(4);
+        } catch (InterruptedException e) {
+        }
+        */
+        
+        // Initialize thread
+        NoteThread nthread = new NoteThread(200, 0.4, 3);
+        Thread th = new Thread(nthread);
+        th.start();
+        NoteThread nthread2 = new NoteThread(300, 0.4, 4);
+        Thread th2 = new Thread(nthread2);
+        th2.start();
+        
+        try {
+            TheUndyingCarpet.synth.sleepFor(totalDuration);
+        } catch (InterruptedException e) {
+            System.err.println("Couldn't sleep");
+        }
+        
+        // Stop units and delete them to reclaim their resources.
+        try {
+            th.join();
+            th2.join();
+        } catch (InterruptedException e) {
+        }
+        lineOut.stop();
+        synth.stop();
+    }
 }
