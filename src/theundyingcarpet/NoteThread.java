@@ -44,4 +44,12 @@ public class NoteThread implements Runnable {
         osc.output.disconnect(0, TheUndyingCarpet.lineOut.input, 1);
         TheUndyingCarpet.synth.remove(osc);
     }
+
+    public void setOsc(SawtoothOscillatorBL osc) {
+        this.osc = osc;
+    }
+
+    public SawtoothOscillatorBL getOsc() {
+        return osc;
+    }
 }
