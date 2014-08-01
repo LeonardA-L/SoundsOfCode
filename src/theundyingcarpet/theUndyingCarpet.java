@@ -58,10 +58,10 @@ public class TheUndyingCarpet {
         */
         
         // Initialize thread
-        NoteThread nthread = new NoteThread(200, 0.4, 3);
+        NoteThread nthread = new NoteThread(new Note(200));
         Thread th = new Thread(nthread);
         th.start();
-        NoteThread nthread2 = new NoteThread(300, 0.4, 4);
+        NoteThread nthread2 = new NoteThread(new Note(300));
         Thread th2 = new Thread(nthread2);
         th2.start();
         

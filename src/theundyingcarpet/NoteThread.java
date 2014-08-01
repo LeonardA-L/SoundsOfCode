@@ -7,14 +7,12 @@ import com.jsyn.unitgen.SawtoothOscillatorBL;
 public class NoteThread implements Runnable {
     
     private SawtoothOscillatorBL osc;
-    private int frequency;
-    private double amplitude;
+    Note note;
     private double duration;
     
-    public NoteThread(int frequency, double amplitude, double duration) {
-        this.frequency = frequency;
-        this.amplitude = amplitude;
-        this.duration = duration;
+    public NoteThread(Note note) {
+        this.note = note;
+        this.duration = note.getDuration();
         osc = new SawtoothOscillatorBL();
         
         TheUndyingCarpet.synth.add(osc);
@@ -22,8 +20,8 @@ public class NoteThread implements Runnable {
         osc.output.connect(0, TheUndyingCarpet.lineOut.input, 0);
         osc.output.connect(0, TheUndyingCarpet.lineOut.input, 1);
         
-        osc.frequency.set(this.frequency);
-        osc.amplitude.set(this.amplitude);
+        osc.frequency.set(note.getFrequency());
+        osc.amplitude.set(1);   // Will be computed from enveloppe
     }
 
     public void run() {
