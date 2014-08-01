@@ -18,6 +18,7 @@ public class TheUndyingCarpet {
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
+    public static final long totalDurationMs = 2000;
     
     public static void playNote(Note note){
         Thread th = new Thread(new NoteThread(note));
@@ -89,7 +90,7 @@ public class TheUndyingCarpet {
             };
         SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
         
-        Note[] noteTab = new Note[200];
+        Note[] noteTab = new Note[(int)(totalDurationMs/clockStepInMs)];
         // Temp : building the note table
         Note n1 = new Note(300, enveloppe);
         Note n2 = new Note(200, enveloppe);
@@ -117,14 +118,16 @@ public class TheUndyingCarpet {
         }
         
         long diff = System.nanoTime() - start;
-        System.out.println(diff/1000);
+        System.out.println("Total delay in µs " + (diff/1000 - totalDurationMs*1000));
         
+        // is this necessary ?
+        /*
         try {
             TheUndyingCarpet.synth.sleepFor(totalDuration);
         } catch (InterruptedException e) {
             System.err.println("Couldn't sleep");
         }
-        
+        */
         // Stop units and delete them to reclaim their resources.
         try {
             for(int i=0; i<runningThreads.size();i++){
