@@ -19,6 +19,7 @@ public class TheUndyingCarpet {
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
     public static final long totalDurationMs = 2000;
+    public static final long totalDurationS = totalDurationMs/1000;
     
     public static void playNote(Note note){
         Thread th = new Thread(new NoteThread(note));
@@ -26,8 +27,23 @@ public class TheUndyingCarpet {
         runningThreads.add(th);
     }
     
+    public static void playTable(Note[] noteTab){
+        long a = System.nanoTime();
+        long b = a;
+        for(int i=0;i<noteTab.length;i++){
+            a = System.nanoTime();
+            Note n = noteTab[i];
+            while(n != null){
+                playNote(noteTab[i]);
+                n=n.getNext();
+            }
+            while(b-a < clockStepInNanos){
+                b = System.nanoTime();
+            }
+        }
+    }
+    
     public static void main(String[] args) {
-        int totalDuration = 5;
         
         // Init list o' threads
         runningThreads = new ArrayList<Thread>();
@@ -37,6 +53,9 @@ public class TheUndyingCarpet {
         lineOut = new LineOut();
         synth.add(lineOut);
         lineOut.start();
+        
+        Note tinnitus = new Note(110);
+        playNote(tinnitus);
         /*
         SawtoothOscillatorBL osc;
         SawtoothOscillatorBL osc2;
@@ -101,21 +120,9 @@ public class TheUndyingCarpet {
         noteTab[100] = n2;
         noteTab[199] = n3;
         
-        long a,b;
         long start = System.nanoTime();
-        a = System.nanoTime();
-        b = a;
-        for(int i=0;i<noteTab.length;i++){
-            a = System.nanoTime();
-            Note n = noteTab[i];
-            while(n != null){
-                playNote(noteTab[i]);
-                n=n.getNext();
-            }
-            while(b-a < clockStepInNanos){
-                b = System.nanoTime();
-            }
-        }
+        
+        playTable(noteTab);
         
         long diff = System.nanoTime() - start;
         System.out.println("Total delay in µs " + (diff/1000 - totalDurationMs*1000));
@@ -135,6 +142,7 @@ public class TheUndyingCarpet {
             }
             //th2.join();
         } catch (InterruptedException e) {
+            System.err.println("Couldn't join");
         }
         lineOut.stop();
         synth.stop();

@@ -10,7 +10,23 @@ public class Note {
     public Note(int frequency, SegmentedEnvelope enveloppe) {
         this.frequency = frequency;
         this.enveloppe = enveloppe;
-        
+    }
+    
+    // Tinnitus
+    public Note(int frequency){
+        double ramp = 0.05;
+        double totalMRamp = TheUndyingCarpet.totalDurationS - ramp;
+        double maxAmplitude = 0.6;
+        double[] enveloppeData =
+            {
+                0.00, 0,
+                ramp, maxAmplitude,
+                totalMRamp,maxAmplitude,
+                ramp, 0
+            };
+        SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
+        this.frequency = frequency;
+        this.enveloppe = enveloppe;
     }
 
     public void setFrequency(int frequency) {
