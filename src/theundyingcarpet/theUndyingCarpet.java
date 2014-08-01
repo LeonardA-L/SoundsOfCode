@@ -5,14 +5,28 @@ import com.jsyn.*; // JSyn and Synthesizer classes
 import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TheUndyingCarpet {
     
     public static LineOut lineOut;
     public static Synthesizer synth;
+    public static ArrayList<Thread> runningThreads;
+    
+    public static void playNote(Note note){
+        NoteThread nthread = new NoteThread(note);
+        Thread th = new Thread(nthread);
+        th.start();
+        runningThreads.add(th);
+    }
     
     public static void main(String[] args) {
         int totalDuration = 5;
+        
+        // Init list o' threads
+        runningThreads = new ArrayList<Thread>();
         
         synth = JSyn.createSynthesizer();
         synth.start();
@@ -71,12 +85,10 @@ public class TheUndyingCarpet {
         SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
         
         // Initialize thread
-        NoteThread nthread = new NoteThread(new Note(200, enveloppe));
-        Thread th = new Thread(nthread);
-        th.start();
-        NoteThread nthread2 = new NoteThread(new Note(300, enveloppe));
-        Thread th2 = new Thread(nthread2);
-        th2.start();
+        Note n1 = new Note(300, enveloppe);
+        playNote(n1);
+        Note n2 = new Note(200, enveloppe);
+        playNote(n2);
         
         try {
             TheUndyingCarpet.synth.sleepFor(totalDuration);
@@ -86,7 +98,9 @@ public class TheUndyingCarpet {
         
         // Stop units and delete them to reclaim their resources.
         try {
-            th.join();
+            for(int i=0; i<runningThreads.size();i++){
+                runningThreads.get(i).join();
+            }
             //th2.join();
         } catch (InterruptedException e) {
         }
