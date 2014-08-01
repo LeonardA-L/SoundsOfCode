@@ -6,6 +6,7 @@ import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,9 +16,11 @@ public class TheUndyingCarpet {
     public static Synthesizer synth;
     public static ArrayList<Thread> runningThreads;
     
+    public static final long clockStepInMs = 10;
+    public static final long clockStepInNanos = clockStepInMs * 1000000;
+    
     public static void playNote(Note note){
-        NoteThread nthread = new NoteThread(note);
-        Thread th = new Thread(nthread);
+        Thread th = new Thread(new NoteThread(note));
         th.start();
         runningThreads.add(th);
     }
@@ -73,6 +76,8 @@ public class TheUndyingCarpet {
         }
         */
         
+        // "A compromise that plays all notes, even if this means delaying the next ones by a few ms (max 5)"
+        
         double[] enveloppeData =
             {
                 0.00, 0,
@@ -84,11 +89,35 @@ public class TheUndyingCarpet {
             };
         SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
         
-        // Initialize thread
+        Note[] noteTab = new Note[200];
+        // Temp : building the note table
         Note n1 = new Note(300, enveloppe);
-        playNote(n1);
         Note n2 = new Note(200, enveloppe);
-        playNote(n2);
+        Note n3 = new Note(400, enveloppe);
+        n1.setNext(n2);
+        n2.setNext(n3);
+        noteTab[0] = n1;
+        noteTab[100] = n2;
+        noteTab[199] = n3;
+        
+        long a,b;
+        long start = System.nanoTime();
+        a = System.nanoTime();
+        b = a;
+        for(int i=0;i<noteTab.length;i++){
+            a = System.nanoTime();
+            Note n = noteTab[i];
+            while(n != null){
+                playNote(noteTab[i]);
+                n=n.getNext();
+            }
+            while(b-a < clockStepInNanos){
+                b = System.nanoTime();
+            }
+        }
+        
+        long diff = System.nanoTime() - start;
+        System.out.println(diff/1000);
         
         try {
             TheUndyingCarpet.synth.sleepFor(totalDuration);

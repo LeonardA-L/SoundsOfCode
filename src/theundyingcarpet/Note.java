@@ -5,6 +5,7 @@ import com.jsyn.data.SegmentedEnvelope;
 public class Note {
     private int frequency;
     private SegmentedEnvelope enveloppe;
+    private Note next;
     
     public Note(int frequency, SegmentedEnvelope enveloppe) {
         this.frequency = frequency;
@@ -36,5 +37,13 @@ public class Note {
 
     public SegmentedEnvelope getEnveloppe() {
         return enveloppe;
+    }
+
+    public void setNext(Note next) {
+        this.next = next;
+    }
+
+    public Note getNext() {
+        return next;
     }
 }

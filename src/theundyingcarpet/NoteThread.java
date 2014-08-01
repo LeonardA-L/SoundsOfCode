@@ -35,7 +35,6 @@ public class NoteThread implements Runnable {
 
     public void run() {
         osc.start();
-        System.out.println(this.duration);
         try {
             Thread.sleep((long)this.duration*1000);
         } catch (InterruptedException e) {
