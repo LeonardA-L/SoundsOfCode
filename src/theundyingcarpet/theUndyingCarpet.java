@@ -1,6 +1,8 @@
 package theundyingcarpet;
 
 import com.jsyn.*; // JSyn and Synthesizer classes
+
+import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.*;
 
 
@@ -57,11 +59,22 @@ public class TheUndyingCarpet {
         }
         */
         
+        double[] enveloppeData =
+            {
+                0.00, 0,
+                0.02, 1.0,  // duration,value pair for frame[0]
+                0.30, 0.3,  // duration,value pair for frame[1]
+                0.50, 0.1,  // duration,value pair for frame[2]
+                0.40, 0.0,  // duration,value pair for frame[3]
+                1.0, 0.0   // duration,value pair for frame[4]
+            };
+        SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
+        
         // Initialize thread
-        NoteThread nthread = new NoteThread(new Note(200));
+        NoteThread nthread = new NoteThread(new Note(200, enveloppe));
         Thread th = new Thread(nthread);
         th.start();
-        NoteThread nthread2 = new NoteThread(new Note(300));
+        NoteThread nthread2 = new NoteThread(new Note(300, enveloppe));
         Thread th2 = new Thread(nthread2);
         th2.start();
         
@@ -74,10 +87,12 @@ public class TheUndyingCarpet {
         // Stop units and delete them to reclaim their resources.
         try {
             th.join();
-            th2.join();
+            //th2.join();
         } catch (InterruptedException e) {
         }
         lineOut.stop();
         synth.stop();
+        
+        System.exit(0);
     }
 }

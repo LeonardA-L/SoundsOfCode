@@ -1,14 +1,15 @@
 package theundyingcarpet;
 
+import com.jsyn.data.SegmentedEnvelope;
+
 public class Note {
     private int frequency;
-    private double amplitude;
-    private double duration;
+    private SegmentedEnvelope enveloppe;
     
-    public Note(int frequency) {
+    public Note(int frequency, SegmentedEnvelope enveloppe) {
         this.frequency = frequency;
-        this.amplitude = 0.4;  // Will be computed from enveloppe
-        this.duration = 4;  // Will be computed from enveloppe
+        this.enveloppe = enveloppe;
+        
     }
 
     public void setFrequency(int frequency) {
@@ -19,19 +20,21 @@ public class Note {
         return frequency;
     }
 
-    public void setAmplitude(double amplitude) {
-        this.amplitude = amplitude;
-    }
-
-    public double getAmplitude() {
-        return amplitude;
-    }
-
-    public void setDuration(double duration) {
-        this.duration = duration;
-    }
-
     public double getDuration() {
+        double duration = 0;
+        double[] envData = new double[enveloppe.getNumFrames()*2];
+        enveloppe.read(envData);
+        for(int i=0;i<envData.length;i+=2){
+            duration+=envData[i];
+        }
         return duration;
+    }
+
+    public void setEnveloppe(SegmentedEnvelope enveloppe) {
+        this.enveloppe = enveloppe;
+    }
+
+    public SegmentedEnvelope getEnveloppe() {
+        return enveloppe;
     }
 }
