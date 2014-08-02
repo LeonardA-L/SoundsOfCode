@@ -1,10 +1,20 @@
 package theundyingcarpet;
 
 import com.jsyn.*; // JSyn and Synthesizer classes
+
+import com.jsyn.data.FloatSample;
 import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.*;
 
+import com.jsyn.util.SampleLoader;
+
+import java.io.File;
+
+import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TheUndyingCarpet {
@@ -13,6 +23,7 @@ public class TheUndyingCarpet {
     protected static Synthesizer synth;
     protected static ArrayList<Thread> runningThreads;
     protected static UnitOscillator tinnitusInstrument;
+    protected static Map<String,FloatSample> samples;
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
@@ -62,10 +73,24 @@ public class TheUndyingCarpet {
         }
     }
     
+    public static void loadSample(String fileName){
+        File file = new File(fileName);
+        FloatSample sample = null;
+        try {
+            sample = SampleLoader.loadFloatSample(file);
+        } catch (IOException e) {
+            System.err.println("Error while loading file");
+        }
+        samples.put(fileName, sample);
+    }
+    
     public static void main(String[] args) {
         
         // Init list o' threads
         runningThreads = new ArrayList<Thread>();
+        // Init samples
+        samples = new HashMap<String,FloatSample>();
+        loadSample("Beat.wav");
         
         synth = JSyn.createSynthesizer();
         synth.start();
@@ -152,6 +177,7 @@ public class TheUndyingCarpet {
         noteTab[100] = n2;
         noteTab[199] = n3;
         */
+        /*
         int j=0;
         int step = 15;
         noteTab[(j++)*step] = n2;
@@ -160,6 +186,34 @@ public class TheUndyingCarpet {
         noteTab[(j++)*step] = n3;
         noteTab[(j++)*step] = n2;
         noteTab[(j++)*step] = n3;
+        *//*
+        double[] beatEnveloppeData =
+            {
+                0.00, 1.0,
+                0.01, 0.5,
+                0.02, 1.0,
+                0.24, 0.0,
+                1.0, 0.0
+            };*/
+        /*
+        Note n4 = new Note(200,beatEnveloppe);
+        noteTab[0] = n4;
+        noteTab[50] = n4;
+        noteTab[100] = n4;
+        noteTab[150] = n4;
+        */
+        
+        
+        
+        FloatSample beatSample = samples.get("Beat.wav");
+        VariableRateMonoReader samplePlayer = new VariableRateMonoReader();
+        samplePlayer.dataQueue.queue( beatSample, 0, beatSample.getNumFrames() );
+        synth.add(samplePlayer);
+        samplePlayer.start();
+        samplePlayer.rate.set( beatSample.getFrameRate() );
+        samplePlayer.output.connect(0, lineOut.input, 0);
+        samplePlayer.output.connect(0, lineOut.input, 1);
+        
         
         long start = System.nanoTime();
         
