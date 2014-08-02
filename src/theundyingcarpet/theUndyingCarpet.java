@@ -115,7 +115,7 @@ public class TheUndyingCarpet {
         oscillators = new HashMap<String,UnitOscillator>();
         oscillators.put("repoInstrument", new TriangleOscillator());
         
-        new TableBuilder();
+        new DataRetriever();
         
         synth = JSyn.createSynthesizer();
         synth.start();
@@ -229,7 +229,7 @@ public class TheUndyingCarpet {
         noteTab[150] = n4;
         */
         
-        Note[] noteTab = TableBuilder.loadTable();
+        Note[] noteTab = DataRetriever.loadTable();
 
         
         long start = System.nanoTime();

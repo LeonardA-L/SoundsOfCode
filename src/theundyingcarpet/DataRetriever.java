@@ -12,10 +12,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class TableBuilder {
+public class DataRetriever {
     public static Note[] noteTable;
 
-    public TableBuilder() {
+    public DataRetriever() {
 
     }
 
@@ -56,7 +56,6 @@ public class TableBuilder {
 
             String l = br.readLine();
             while (l != null) {
-                System.out.println(l);
                 String[] event = l.split(",");
                 handleEvent(event);
                 l = br.readLine();
