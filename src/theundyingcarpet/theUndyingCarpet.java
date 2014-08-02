@@ -29,7 +29,7 @@ public class TheUndyingCarpet {
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
-    public static final long totalDurationMs = 3000;
+    public static final long totalDurationMs = 300000;
     public static final long totalDurationS = totalDurationMs/1000;
     
     public static void setTinnitusFrequency(int frequency){
