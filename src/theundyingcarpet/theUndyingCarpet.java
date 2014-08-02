@@ -1,21 +1,18 @@
 package theundyingcarpet;
 
 import com.jsyn.*; // JSyn and Synthesizer classes
-
 import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.*;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class TheUndyingCarpet {
     
-    public static LineOut lineOut;
-    public static Synthesizer synth;
-    public static ArrayList<Thread> runningThreads;
-    public static SawtoothOscillatorBL tinnitusInstrument;
+    protected static LineOut lineOut;
+    protected static Synthesizer synth;
+    protected static ArrayList<Thread> runningThreads;
+    protected static UnitOscillator tinnitusInstrument;
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
@@ -31,6 +28,8 @@ public class TheUndyingCarpet {
         th.start();
         runningThreads.add(th);
     }
+    
+    
     
     public static void playTable(Note[] noteTab, int[] tinnitusFrequencies){
         long a = System.nanoTime();
@@ -50,6 +49,16 @@ public class TheUndyingCarpet {
             while(b-a < clockStepInNanos){
                 b = System.nanoTime();
             }
+        }
+    }
+    
+    public static void waitForThreads(){
+        try {
+            for(int i=0; i<runningThreads.size();i++){
+                runningThreads.get(i).join();
+            }
+        } catch (InterruptedException e) {
+            System.err.println("Couldn't join");
         }
     }
     
@@ -138,9 +147,19 @@ public class TheUndyingCarpet {
         Note n3 = new Note(400, enveloppe);
         n1.setNext(n2);
         n2.setNext(n3);
+        /*
         noteTab[0] = n1;
         noteTab[100] = n2;
         noteTab[199] = n3;
+        */
+        int j=0;
+        int step = 15;
+        noteTab[(j++)*step] = n2;
+        noteTab[(j++)*step] = n3;
+        noteTab[(j++)*step] = n2;
+        noteTab[(j++)*step] = n3;
+        noteTab[(j++)*step] = n2;
+        noteTab[(j++)*step] = n3;
         
         long start = System.nanoTime();
         
@@ -158,14 +177,9 @@ public class TheUndyingCarpet {
         }
         */
         // Stop units and delete them to reclaim their resources.
-        try {
-            for(int i=0; i<runningThreads.size();i++){
-                runningThreads.get(i).join();
-            }
-            //th2.join();
-        } catch (InterruptedException e) {
-            System.err.println("Couldn't join");
-        }
+        
+        waitForThreads();
+        
         lineOut.stop();
         synth.stop();
         

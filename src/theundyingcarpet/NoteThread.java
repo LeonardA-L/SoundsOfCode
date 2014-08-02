@@ -2,19 +2,22 @@ package theundyingcarpet;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.SawtoothOscillatorBL;
+import com.jsyn.unitgen.*;
+import com.jsyn.unitgen.UnitOscillator;
 import com.jsyn.unitgen.VariableRateMonoReader;
 
 public class NoteThread implements Runnable {
     
-    private SawtoothOscillatorBL osc;
+    private UnitOscillator osc;
     Note note;
     private double duration;
     
     public NoteThread(Note note) {
         this.note = note;
         this.duration = note.getDuration();
-        osc = new SawtoothOscillatorBL();
+        osc = new TriangleOscillator();
+        
+        
         
         TheUndyingCarpet.synth.add(osc);
         
@@ -45,11 +48,11 @@ public class NoteThread implements Runnable {
         TheUndyingCarpet.synth.remove(osc);
     }
 
-    public void setOsc(SawtoothOscillatorBL osc) {
+    public void setOsc(UnitOscillator osc) {
         this.osc = osc;
     }
 
-    public SawtoothOscillatorBL getOsc() {
+    public UnitOscillator getOsc() {
         return osc;
     }
 }

@@ -16,7 +16,7 @@ public class Note {
     public Note(int frequency){
         double ramp = 0.05;
         double totalMRamp = TheUndyingCarpet.totalDurationS - ramp;
-        double maxAmplitude = 0.6;
+        double maxAmplitude = 0.3;
         double[] enveloppeData =
             {
                 0.00, 0,
