@@ -15,9 +15,7 @@ public class NoteThread implements Runnable {
     public NoteThread(Note note) {
         this.note = note;
         this.duration = note.getDuration();
-        osc = new TriangleOscillator();
-        
-        
+        osc = note.getOsc();
         
         TheUndyingCarpet.synth.add(osc);
         

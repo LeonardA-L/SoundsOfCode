@@ -25,6 +25,7 @@ public class TheUndyingCarpet {
     protected static UnitOscillator tinnitusInstrument;
     protected static Map<String,FloatSample> samples;
     protected static Map<String,SegmentedEnvelope> enveloppes;
+    protected static Map<String,UnitOscillator> oscillators;
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
@@ -110,6 +111,10 @@ public class TheUndyingCarpet {
         SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
         enveloppes.put("basic", enveloppe);
         
+        // Init oscillators
+        oscillators = new HashMap<String,UnitOscillator>();
+        oscillators.put("repoInstrument", new TriangleOscillator());
+        
         new TableBuilder();
         
         synth = JSyn.createSynthesizer();
@@ -118,7 +123,7 @@ public class TheUndyingCarpet {
         synth.add(lineOut);
         lineOut.start();
         
-        Note tinnitus = new Note(110);
+        Note tinnitus = new Note(110, new SineOscillator());
         //playNote(tinnitus);
         // Manually playing note
         NoteThread nt = new NoteThread(tinnitus);
