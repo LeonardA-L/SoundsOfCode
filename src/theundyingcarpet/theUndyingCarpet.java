@@ -97,6 +97,8 @@ public class TheUndyingCarpet {
         samples = new HashMap<String,FloatSample>();
         loadSample("Beat.wav");
         
+        new TableBuilder();
+        
         synth = JSyn.createSynthesizer();
         synth.start();
         lineOut = new LineOut();
@@ -157,16 +159,15 @@ public class TheUndyingCarpet {
         }
         */
         
-        // "A compromise that plays all notes, even if this means delaying the next ones by a few ms (max 5)"
         
+        /*
         double[] enveloppeData =
             {
-                0.00, 0,
-                0.02, 1.0,  // duration,value pair for frame[0]
-                0.30, 0.3,  // duration,value pair for frame[1]
-                0.50, 0.1,  // duration,value pair for frame[2]
-                0.40, 0.0,  // duration,value pair for frame[3]
-                1.0, 0.0   // duration,value pair for frame[4]
+                0.00, 1.0,
+                0.01, 0.5,
+                0.02, 1.0,
+                0.24, 0.0,
+                1.0, 0.0
             };
         SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
         
@@ -177,7 +178,7 @@ public class TheUndyingCarpet {
         Note n3 = new Note(400, enveloppe);
         n1.setNext(n2);
         n2.setNext(n3);
-        /*
+        
         noteTab[0] = n1;
         noteTab[100] = n2;
         noteTab[199] = n3;
@@ -200,7 +201,7 @@ public class TheUndyingCarpet {
                 0.24, 0.0,
                 1.0, 0.0
             };*/
-        
+        /*
         Note n4 = new Sample("Beat.wav");
         noteTab[0] = n4;
         noteTab[50] = n4;
@@ -208,15 +209,13 @@ public class TheUndyingCarpet {
         n5.setNext(n3);
         noteTab[100] = n5;
         noteTab[150] = n4;
+        */
         
-        
-        
-        
-        
-        
+        Note[] noteTab = TableBuilder.loadTable();
+
         
         long start = System.nanoTime();
-        
+        // "A compromise that plays all notes, even if this means delaying the next ones by a few ms (max 5)"
         playTable(noteTab, weeklyFrequency);
         
         long diff = System.nanoTime() - start;
