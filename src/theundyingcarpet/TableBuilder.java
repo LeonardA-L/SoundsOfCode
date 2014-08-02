@@ -21,15 +21,7 @@ public class TableBuilder {
     }
     
     public static Note[] temporaryTableBuilder(){
-        double[] enveloppeData =
-            {
-                0.00, 1.0,
-                0.01, 0.5,
-                0.02, 1.0,
-                0.24, 0.0,
-                1.0, 0.0
-            };
-        SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
+        SegmentedEnvelope enveloppe = TheUndyingCarpet.enveloppes.get("basic");
         // Temp : building the note table
 
         addNote(0,new Note(300, enveloppe));
