@@ -35,11 +35,16 @@ public class TheUndyingCarpet {
     }
     
     public static void playNote(Note note){
-        Thread th = new Thread(new NoteThread(note));
+        Thread th = null;
+        if(note instanceof Sample){
+            th = new Thread(new SampleThread((Sample)note));
+        }
+        else{
+            th = new Thread(new NoteThread(note));
+        }
         th.start();
         runningThreads.add(th);
     }
-    
     
     
     public static void playTable(Note[] noteTab, int[] tinnitusFrequencies){
@@ -49,7 +54,7 @@ public class TheUndyingCarpet {
             a = System.nanoTime();
             Note n = noteTab[i];
             while(n != null){
-                playNote(noteTab[i]);
+                playNote(n);
                 n=n.getNext();
             }
             
@@ -195,24 +200,19 @@ public class TheUndyingCarpet {
                 0.24, 0.0,
                 1.0, 0.0
             };*/
-        /*
-        Note n4 = new Note(200,beatEnveloppe);
+        
+        Note n4 = new Sample("Beat.wav");
         noteTab[0] = n4;
         noteTab[50] = n4;
-        noteTab[100] = n4;
+        Note n5 = new Sample("Beat.wav");
+        n5.setNext(n3);
+        noteTab[100] = n5;
         noteTab[150] = n4;
-        */
         
         
         
-        FloatSample beatSample = samples.get("Beat.wav");
-        VariableRateMonoReader samplePlayer = new VariableRateMonoReader();
-        samplePlayer.dataQueue.queue( beatSample, 0, beatSample.getNumFrames() );
-        synth.add(samplePlayer);
-        samplePlayer.start();
-        samplePlayer.rate.set( beatSample.getFrameRate() );
-        samplePlayer.output.connect(0, lineOut.input, 0);
-        samplePlayer.output.connect(0, lineOut.input, 1);
+        
+        
         
         
         long start = System.nanoTime();
