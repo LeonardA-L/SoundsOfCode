@@ -123,7 +123,7 @@ public class TheUndyingCarpet {
         synth.add(lineOut);
         lineOut.start();
         
-        Note tinnitus = new Note(110, new SineOscillator());
+        Note tinnitus = new Note(110, new TriangleOscillator());
         //playNote(tinnitus);
         // Manually playing note
         NoteThread nt = new NoteThread(tinnitus);
@@ -132,11 +132,13 @@ public class TheUndyingCarpet {
         runningThreads.add(th);
         tinnitusInstrument = nt.getOsc();
         
-        int[] weeklyFrequency;
+        
+        /*
         weeklyFrequency = new int[(int)(totalDurationMs/clockStepInMs)];
         weeklyFrequency[0] = 200;
         weeklyFrequency[100] = 400;
         weeklyFrequency[200] = 300;
+        */
         /*
         SawtoothOscillatorBL osc;
         SawtoothOscillatorBL osc2;
@@ -228,8 +230,10 @@ public class TheUndyingCarpet {
         noteTab[100] = n5;
         noteTab[150] = n4;
         */
-        
-        Note[] noteTab = DataRetriever.loadTable();
+        Note[] noteTab = new Note[(int)(totalDurationMs/clockStepInMs)];
+        int[] weeklyFrequency = new int[(int)(totalDurationMs/clockStepInMs)];
+        // Fill 'em
+        DataRetriever.loadTable(noteTab,weeklyFrequency);
 
         
         long start = System.nanoTime();
