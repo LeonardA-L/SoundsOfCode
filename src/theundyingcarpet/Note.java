@@ -21,7 +21,7 @@ public class Note {
     public Note(int frequency, UnitOscillator osc){
         double ramp = 0.05;
         double totalMRamp = TheUndyingCarpet.totalDurationS - ramp;
-        double maxAmplitude = 0.3;
+        double maxAmplitude = Generator.getTypeAmplitudeFactor(TheUndyingCarpet.NoteType.TINNITUS);
         double[] enveloppeData =
             {
                 0.00, 0,

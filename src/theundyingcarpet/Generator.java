@@ -45,12 +45,15 @@ public class Generator {
         return a;
     }
 
-    private static double getTypeAmplitudeFactor(NoteType noteType) {
+    public static double getTypeAmplitudeFactor(NoteType noteType) {
         double a;
         switch (noteType) {
+        case TINNITUS:
+            a = 0.25;
+        break;
         case REPO:
         default:
-            a = 0.5;
+            a = 0.4;
         }
         return a;
     }
@@ -62,7 +65,14 @@ public class Generator {
         switch (noteType) {
         case REPO:
         default:
-            double[] enveloppeRepoData = { 0.00, maxAmpl, 0.01, 0.5 * maxAmpl, 0.02, maxAmpl, 0.24, 0.0, 1.0, 0.0 };
+            double[] enveloppeRepoData = { 
+                0.002, 0.8*maxAmpl, 
+                0.015, 1 * maxAmpl, 
+                0.05, 0.7 * maxAmpl, 
+                0.1, 0.5 * maxAmpl,
+                0.16, 0.2 * maxAmpl,
+                0.15, 0.0,
+                1.0, 0};
             SegmentedEnvelope enveloppe = new SegmentedEnvelope(enveloppeRepoData);
             return enveloppe;
         }

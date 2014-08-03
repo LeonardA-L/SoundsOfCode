@@ -32,7 +32,8 @@ public class TheUndyingCarpet {
     protected static Map<String,FloatSample> samples;
     
     public enum NoteType{
-        REPO
+        REPO,
+        TINNITUS
     }
     
     public static final long clockStepInMs = 10;
