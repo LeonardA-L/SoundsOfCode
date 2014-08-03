@@ -1,6 +1,7 @@
 *.jpr
 
 classes/
+*.class
 
 Ignore/
 *.wav

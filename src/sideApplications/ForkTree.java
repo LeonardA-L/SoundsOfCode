@@ -83,6 +83,10 @@ public class ForkTree {
         ArrayList<Integer> depths = new ArrayList<Integer>();
         ft.depth = 0;
         ft.addDepth(ft.root,depths);
-        System.out.println(depths);
+        
+        System.out.println("TreeDepth");
+        for(int i=0;i<depths.size();i++){
+            System.out.println(depths.get(i));
+        }
     }
 }
