@@ -79,7 +79,7 @@ public class DataRetriever {
         else{   // It's a note
             int frequency = Integer.parseInt(event[1]);
             SegmentedEnvelope env = TheUndyingCarpet.enveloppes.get(event[2]);
-            UnitOscillator osc = TheUndyingCarpet.generateInstrument(event[3]);
+            UnitOscillator osc = Generator.generateInstrument(event[3]);
             n = new Note(frequency,env,osc);
         }
         if(n != null){

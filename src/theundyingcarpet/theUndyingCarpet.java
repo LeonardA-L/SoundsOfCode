@@ -31,26 +31,6 @@ public class TheUndyingCarpet {
     public static final long totalDurationMs = 300000;
     public static final long totalDurationS = totalDurationMs/1000;
     
-    public static UnitOscillator generateInstrument(String instrumentName){
-        UnitOscillator ug = null;
-        // Java 8 would have allowed a switch/case with strings
-        if(instrumentName.equals("JavaScript")){
-            ug = new SawtoothOscillatorBL();
-        }
-        else if(instrumentName.equals("Java")){
-            ug = new TriangleOscillator();
-        }
-        else if(instrumentName.equals("Ruby")){
-            ug = new ImpulseOscillatorBL();
-        }
-        else if(instrumentName.equals("PHP")){
-            ug = new SineOscillator();
-        }
-        else{
-            ug = new SquareOscillator();
-        }
-        return ug;
-    }
     
     public static void setTinnitusFrequency(int frequency){
         tinnitusInstrument.frequency.set(frequency);
