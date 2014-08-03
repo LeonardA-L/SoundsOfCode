@@ -21,6 +21,8 @@ public class NoteThread implements Runnable {
         
         osc.output.connect(0, TheUndyingCarpet.lineOut.input, 0);
         osc.output.connect(0, TheUndyingCarpet.lineOut.input, 1);
+        osc.output.connect(0, TheUndyingCarpet.fileOut.getInput(), 0);
+        osc.output.connect(0, TheUndyingCarpet.fileOut.getInput(), 1);
         
         osc.frequency.set(note.getFrequency());
         
@@ -43,6 +45,8 @@ public class NoteThread implements Runnable {
         osc.stop();
         osc.output.disconnect(0, TheUndyingCarpet.lineOut.input, 0);
         osc.output.disconnect(0, TheUndyingCarpet.lineOut.input, 1);
+        osc.output.disconnect(0, TheUndyingCarpet.fileOut.getInput(), 0);
+        osc.output.disconnect(0, TheUndyingCarpet.fileOut.getInput(), 1);
         TheUndyingCarpet.synth.remove(osc);
     }
 

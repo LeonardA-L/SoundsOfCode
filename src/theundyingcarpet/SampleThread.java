@@ -18,6 +18,8 @@ public class SampleThread implements Runnable {
         samplePlayer.rate.set( sample.getFrameRate() );
         samplePlayer.output.connect(0, TheUndyingCarpet.lineOut.input, 0);
         samplePlayer.output.connect(0, TheUndyingCarpet.lineOut.input, 1);
+        samplePlayer.output.connect(0, TheUndyingCarpet.fileOut.getInput(), 0);
+        samplePlayer.output.connect(0, TheUndyingCarpet.fileOut.getInput(), 1);
         
         try{
             Thread.sleep(1000);

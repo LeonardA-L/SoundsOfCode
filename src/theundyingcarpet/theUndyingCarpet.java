@@ -8,11 +8,16 @@ import com.jsyn.unitgen.*;
 
 import com.jsyn.util.SampleLoader;
 
+import com.jsyn.util.WaveRecorder;
+
 import java.io.File;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +25,7 @@ import java.util.Map;
 public class TheUndyingCarpet {
     
     protected static LineOut lineOut;
+    protected static WaveRecorder fileOut;
     protected static Synthesizer synth;
     protected static ArrayList<Thread> runningThreads;
     protected static UnitOscillator tinnitusInstrument;
@@ -93,7 +99,9 @@ public class TheUndyingCarpet {
     
     public static void main(String[] args) {
         
+        
         // Init list o' threads
+        
         runningThreads = new ArrayList<Thread>();
         // Init samples
         samples = new HashMap<String,FloatSample>();
@@ -116,9 +124,19 @@ public class TheUndyingCarpet {
         
         synth = JSyn.createSynthesizer();
         synth.start();
+        
+        
+        File waveFile = new File( "temp_recording.wav" );
+        try {
+            fileOut = new WaveRecorder( synth, waveFile );
+        } catch (FileNotFoundException e) {
+            System.err.println("Recording file not found");
+        }
+        
         lineOut = new LineOut();
         synth.add(lineOut);
         lineOut.start();
+        fileOut.start();
         
         Note tinnitus = new Note(110, new TriangleOscillator());
         //playNote(tinnitus);
@@ -252,9 +270,14 @@ public class TheUndyingCarpet {
         
         waitForThreads();
         
+        fileOut.stop();
         lineOut.stop();
         synth.stop();
-        
+
+        try {
+            fileOut.close();
+        } catch (IOException e) {
+        }
         System.exit(0);
     }
 }
