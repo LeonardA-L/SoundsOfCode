@@ -30,7 +30,10 @@ public class TheUndyingCarpet {
     protected static ArrayList<Thread> runningThreads;
     protected static UnitOscillator tinnitusInstrument;
     protected static Map<String,FloatSample> samples;
-    protected static Map<String,SegmentedEnvelope> enveloppes;
+    
+    public enum NoteType{
+        REPO
+    }
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
@@ -99,25 +102,12 @@ public class TheUndyingCarpet {
     
     public static void main(String[] args) {
         
-        
         // Init list o' threads
         
         runningThreads = new ArrayList<Thread>();
         // Init samples
         samples = new HashMap<String,FloatSample>();
         loadSample("Beat.wav");
-        // init enveloppes
-        enveloppes = new HashMap<String,SegmentedEnvelope>();
-        double[] enveloppeData =
-            {
-                0.00, 1.0,
-                0.01, 0.5,
-                0.02, 1.0,
-                0.24, 0.0,
-                1.0, 0.0
-            };
-        SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
-        enveloppes.put("basic", enveloppe);
         
         
         new DataRetriever();

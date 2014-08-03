@@ -29,7 +29,7 @@ public class DataRetriever {
         }
     }
 
-/*
+    /*
     public static Note[] temporaryTableBuilder() {
         SegmentedEnvelope enveloppe = TheUndyingCarpet.enveloppes.get("basic");
         // Temp : building the note table
@@ -46,6 +46,7 @@ public class DataRetriever {
         return noteTable;
     }
 */
+
     public static void loadTable(Note[] noteTable, int[] weeklyFrequency) {
         //noteTable = new Note[(int)(TheUndyingCarpet.totalDurationMs / TheUndyingCarpet.clockStepInMs)];
         try {
@@ -60,30 +61,32 @@ public class DataRetriever {
                 l = br.readLine();
             }
             br.close();
-        } catch (IOException e ) {
+        } catch (IOException e) {
             System.err.println("File not found");
         }
     }
 
     private static void handleEvent(String[] event, Note[] noteTable, int[] weeklyFrequency) {
-        int frame = Integer.parseInt(event[0]);
-        Note n = null;
-        if(event.length == 2){  // it's a sample
-            try{
-                weeklyFrequency[frame] = Integer.parseInt(event[1]);
+        try {
+            int frame = Integer.parseInt(event[0]);
+            Note n = null;
+            if (event.length == 2) { // it's a sample
+                try {
+                    weeklyFrequency[frame] = Integer.parseInt(event[1]);
+                } catch (NumberFormatException e) {
+                    n = new Sample(event[1]);
+                }
+            } else { // It's a note
+                int frequency = Integer.parseInt(event[1]);
+                SegmentedEnvelope env = Generator.generateEnveloppe(event[2], TheUndyingCarpet.NoteType.REPO);
+                UnitOscillator osc = Generator.generateInstrument(event[3]);
+                n = new Note(frequency, env, osc);
             }
-            catch(NumberFormatException e){
-                n = new Sample(event[1]);
+            if (n != null) {
+                addNote(frame, n, noteTable);
             }
-        }
-        else{   // It's a note
-            int frequency = Integer.parseInt(event[1]);
-            SegmentedEnvelope env = TheUndyingCarpet.enveloppes.get(event[2]);
-            UnitOscillator osc = Generator.generateInstrument(event[3]);
-            n = new Note(frequency,env,osc);
-        }
-        if(n != null){
-            addNote(frame, n, noteTable);
+        } catch (Exception e) {
+
         }
     }
 }
