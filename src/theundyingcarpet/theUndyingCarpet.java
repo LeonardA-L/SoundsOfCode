@@ -25,12 +25,32 @@ public class TheUndyingCarpet {
     protected static UnitOscillator tinnitusInstrument;
     protected static Map<String,FloatSample> samples;
     protected static Map<String,SegmentedEnvelope> enveloppes;
-    protected static Map<String,UnitOscillator> oscillators;
     
     public static final long clockStepInMs = 10;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
     public static final long totalDurationMs = 300000;
     public static final long totalDurationS = totalDurationMs/1000;
+    
+    public static UnitOscillator generateInstrument(String instrumentName){
+        UnitOscillator ug = null;
+        // Java 8 would have allowed a switch/case with strings
+        if(instrumentName.equals("JavaScript")){
+            ug = new SawtoothOscillatorBL();
+        }
+        else if(instrumentName.equals("Java")){
+            ug = new TriangleOscillator();
+        }
+        else if(instrumentName.equals("Ruby")){
+            ug = new ImpulseOscillatorBL();
+        }
+        else if(instrumentName.equals("PHP")){
+            ug = new SineOscillator();
+        }
+        else{
+            ug = new SquareOscillator();
+        }
+        return ug;
+    }
     
     public static void setTinnitusFrequency(int frequency){
         tinnitusInstrument.frequency.set(frequency);
@@ -111,9 +131,6 @@ public class TheUndyingCarpet {
         SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
         enveloppes.put("basic", enveloppe);
         
-        // Init oscillators
-        oscillators = new HashMap<String,UnitOscillator>();
-        oscillators.put("repoInstrument", new TriangleOscillator());
         
         new DataRetriever();
         
