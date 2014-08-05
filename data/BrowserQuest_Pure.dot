@@ -1,16 +1,4 @@
 digraph{
-mozilla -> nickbreslin
-mozilla -> nathanoehlman
-mozilla -> syntaqx
-mozilla -> jeffplang
-mozilla -> sgricci
-mozilla -> willurd
-nickbreslin -> jeanfbrito
-nathanoehlman -> ErikUri
-syntaqx -> alixaxel
-jeffplang -> benburton
-jeffplang -> sgricci
-sgricci -> RazorFlint
-willurd -> minikomi
+
 }
 
