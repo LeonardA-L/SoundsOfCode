@@ -10,7 +10,7 @@
 	.lengthSelector{
 		width:100%;
 		background:#F66;
-		height:40px;
+		height:150px;
 		
 		cursor:pointer;
 	}
@@ -29,7 +29,7 @@
 	
 	.comments{
 		position:relative;
-		height:30px;
+		height:50px;
 		background:#EEE;
 	}
 	
@@ -37,7 +37,7 @@
 		height:60px;
 		width:200px;
 		position:absolute;
-		top:-15px;
+		top:-5px;
 	}
 	
 	.pointer, .comContent{
@@ -55,21 +55,56 @@
 	
 	.comContent{
 		display:none;
-		width:140px;
+		width:170px;
 		background:#F6F;
 		height:100%;
+		
 	}
 	
 	.comment:hover .comContent{
 		display:inline-block;
 	}
 
+	.headerContent, .headerButtons{
+		float:left;
+	}
+	
+	.headerButtons{
+		width:50px;
+		height:100%;
+	}
+	
+	.headerContent{
+		width:calc(100% - 55px);
+	}
+	
+	.header{
+		height:200px;
+		overflow:hidden;
+		
+		width:100%;
+		
+			/* For Safari 3.1 to 6.0 */
+			-webkit-transition-property: height;
+			-webkit-transition-duration: 0.2s;
+			-webkit-transition-timing-function: linear;
+			/* Standard syntax */
+			transition-property: height;
+			transition-duration: 0.2s;
+			transition-timing-function: linear;
+	}
+	
+	.head{
+		position:fixed;
+		width:100%;
+	}
 	
 	</style>
     <script type="text/javascript">
         // Global variable to track current file name.
         var currentFile = "demo.mp3";
 		var inited = false;	// I hereby declare inited as being a real word of the english language. Shakespeare style
+		var graphOpen = false;
 		
 		function initAudio(){
 			var oAudio = document.getElementById('audioTag');
@@ -133,30 +168,51 @@
 			}
 		}
 		
+		function toggleGraphs(){
+			var headerHeight = 200;
+			if(!graphOpen){
+				headerHeight = 350;
+			}
+			graphOpen = !graphOpen;
+			document.getElementsByClassName('header')[0].setAttribute('style','height:'+headerHeight+'px');
+			
+		}
+		
     </script>
   </head>
   
   <body id="body">
-    <audio id="audioTag">
-      Get a decent browser
-    </audio>
-    <button id="play" onclick="toggleAudio();">
-      Play
-    </button>
-
-	<div id="songVisualizer" class="lengthSelector" onclick="gotoAudio(event)">
-	<div class="playingBar"></div>
+	<div class="head">
+	<div class="header">
+		<div class="headerButtons">
+			<audio id="audioTag">
+			  Get a decent browser
+			</audio>
+			<button id="play" onclick="toggleAudio();">
+			  Play
+			</button>
+		</div>
+		<div class="headerContent">
+			<div id="songVisualizer" class="lengthSelector" onclick="gotoAudio(event)">
+			<div class="playingBar"></div>
+			</div>
+			<div class="comments">
+			<div class="comment">
+				<div class="pointer"></div>
+				<div class="comContent"> Ok lol </div>
+			</div>
+			</div>
+			<div id="graphsVisualizer" class="lengthSelector graphVisu" onclick="gotoAudio(event)">
+				<div class="playingBar visuBar"></div>
+			</div>
+		</div>
 	</div>
-	<div class="comments">
-	<div class="comment">
-		<div class="pointer"></div>
-		<div class="comContent"> Ok lol </div>
+	<div>
+		<button id="showGraphs" onclick="toggleGraphs();">
+			I want graphz
+		</button>
 	</div>
 	</div>
-	<div id="graphsVisualizer" class="lengthSelector graphVisu">
-	<div class="playingBar visuBar"></div>
-	</div>
-	
   </body>
 
 </html>
