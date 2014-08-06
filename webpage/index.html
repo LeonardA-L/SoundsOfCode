@@ -6,6 +6,8 @@
 	#body{
 		padding:0;
 		margin:0;
+		
+		background:#EEE;
 	}
 	.lengthSelector{
 		width:100%;
@@ -34,10 +36,12 @@
 	}
 	
 	.comment{
-		height:60px;
-		width:200px;
+		border:solid 1px;
+		height:20px;
+		width:20px;
 		position:absolute;
-		top:-5px;
+		top:15px;
+		overflow: visible;
 	}
 	
 	.pointer, .comContent{
@@ -48,22 +52,21 @@
 	
 	.pointer{
 		width:20px;
-		margin:20px 0;
 		background:#FF6;
 		height:20px;
 	}
 	
 	.comContent{
+		position:relative;
+		top:0;
+		left:25px;
+		margin-top:-100px;
 		display:none;
-		width:170px;
-		background:#F6F;
-		height:100%;
-		
+		width:275px;
+		background:#FAF;
+		height:100px;
 	}
 	
-	.comment:hover .comContent{
-		display:inline-block;
-	}
 
 	.headerContent, .headerButtons{
 		float:left;
@@ -99,12 +102,43 @@
 		width:100%;
 	}
 	
+	
+	
+	.body{
+		background:#FFFFFF;
+		width:80%;
+		margin:0 auto;
+		margin-bottom:20px;
+		padding:30px;
+		padding-top:200px;
+	}
+	
 	</style>
     <script type="text/javascript">
         // Global variable to track current file name.
         var currentFile = "demo.mp3";
 		var inited = false;	// I hereby declare inited as being a real word of the english language. Shakespeare style
 		var graphOpen = false;
+		
+		var comContents;
+		//visibility:visible;
+		var callTimeOutOnToolTip = function(element){
+			setTimeout(function(){
+				element.style.display="none";
+			},4000);
+		};
+		
+		setTimeout(function(){
+			var comments = window.document.getElementsByClassName('pointer');
+			comContents = window.document.getElementsByClassName('comContent');
+			for(var i = 0; i< comments.length;i++){
+				comments[i].i = i;
+				comments[i].onmouseover = function(e) {
+					comContents[this.i].style.display="inline-block";
+					callTimeOutOnToolTip(comContents[this.i]);
+				};
+			}
+		}, 0);
 		
 		function initAudio(){
 			var oAudio = document.getElementById('audioTag');
@@ -197,10 +231,17 @@
 			<div class="playingBar"></div>
 			</div>
 			<div class="comments">
-			<div class="comment">
+			
+			<div class="comment" style="left:80%">
 				<div class="pointer"></div>
-				<div class="comContent"> Ok lol </div>
+				<div class="comContent"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
 			</div>
+			<div class="comment" style="left:0%">
+				<div class="pointer"></div>
+				<div class="comContent"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
+			</div>
+			
+			
 			</div>
 			<div id="graphsVisualizer" class="lengthSelector graphVisu" onclick="gotoAudio(event)">
 				<div class="playingBar visuBar"></div>
@@ -212,6 +253,44 @@
 			I want graphz
 		</button>
 	</div>
+	</div>
+	<div class="body">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
+
+Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
+
+Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
+
+Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
+
+Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
+
+Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
+
+Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
+
+Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
+
+Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
+
+Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
+
+Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
+
+Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
+
+Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
+
+Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
+
+Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
+
+Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
+
+Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
 	</div>
   </body>
 
