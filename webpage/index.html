@@ -10,6 +10,7 @@
 		background:#EEE;
 	}
 	.lengthSelector{
+		position:relative;
 		width:100%;
 		background:#F66;
 		height:150px;
@@ -20,7 +21,8 @@
 		background:#6F6;
 	}
 	.playingBar{
-		position:relative;
+		position:absolute;
+		top:0;
 		background:#66F;
 		width:3px;
 		height:100%;
@@ -59,6 +61,7 @@
 	.comContent{
 		position:relative;
 		top:0;
+		float:left;
 		left:25px;
 		margin-top:-100px;
 		display:none;
@@ -67,18 +70,20 @@
 		height:100px;
 	}
 	
-
-	.headerContent, .headerButtons{
-		float:left;
+	.hangLeft{
+		left:auto;
+		float:right;
+		right:25px;
 	}
 	
-	.headerButtons{
-		width:50px;
-		height:100%;
+	
+	.play{
+		position:absolute;
+		z-index:3;
 	}
 	
 	.headerContent{
-		width:calc(100% - 55px);
+		width:100%;
 	}
 	
 	.header{
@@ -140,17 +145,15 @@
 			}
 		}, 0);
 		
-		function initAudio(){
+		setTimeout(function(){
 			var oAudio = document.getElementById('audioTag');
 			oAudio.src = currentFile;
 			oAudio.addEventListener("timeupdate", progressChecking, true);
-		}
+			inited=true;
+		},0);
 		
-        function toggleAudio() {
-			if(!inited){
-				initAudio();
-				inited = true;
-			}
+        function toggleAudio(event) {
+			event.stopPropagation();
             // Check for audio element support.
             if (window.HTMLAudioElement) {
                 try {
@@ -183,6 +186,7 @@
                 try {
                     var oAudio = document.getElementById('audioTag');
                     oAudio.currentTime = percent*oAudio.duration;
+					oAudio.play();
                 }
                 catch (e) {
                     // Fail silently but show in F12 developer tools console
@@ -218,23 +222,21 @@
   <body id="body">
 	<div class="head">
 	<div class="header">
-		<div class="headerButtons">
 			<audio id="audioTag">
 			  Get a decent browser
 			</audio>
-			<button id="play" onclick="toggleAudio();">
-			  Play
-			</button>
-		</div>
 		<div class="headerContent">
 			<div id="songVisualizer" class="lengthSelector" onclick="gotoAudio(event)">
+			<button id="play" onclick="toggleAudio(event);">
+			  Play
+			</button>
 			<div class="playingBar"></div>
 			</div>
 			<div class="comments">
 			
 			<div class="comment" style="left:80%">
 				<div class="pointer"></div>
-				<div class="comContent"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
+				<div class="comContent hangLeft"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
 			</div>
 			<div class="comment" style="left:0%">
 				<div class="pointer"></div>
