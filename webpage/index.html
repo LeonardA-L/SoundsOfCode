@@ -1,10 +1,7 @@
-<!DOCTYPE html>
 <html>
   
   <head>
-    <title>HTML5 Audio Player </title>    
-    <!-- Uncomment the following meta tag if you have issues rendering this page on an intranet site. -->    
-    <!--  <meta http-equiv="X-UA-Compatible" content="IE=9"/> -->
+    <title>The Undying Carpet</title>
 	<style>
 	#body{
 		padding:0;
@@ -17,31 +14,80 @@
 		
 		cursor:pointer;
 	}
+	.graphVisu{
+		background:#6F6;
+	}
 	.playingBar{
 		position:relative;
 		background:#66F;
 		width:3px;
 		height:100%;
 	}
+	.visuBar{
+		background:#F6F;
+	}
+	
+	.comments{
+		position:relative;
+		height:30px;
+		background:#EEE;
+	}
+	
+	.comment{
+		height:60px;
+		width:200px;
+		position:absolute;
+		top:-15px;
+	}
+	
+	.pointer, .comContent{
+		display:inline-block;
+		vertical-align:top;
+		
+	}
+	
+	.pointer{
+		width:20px;
+		margin:20px 0;
+		background:#FF6;
+		height:20px;
+	}
+	
+	.comContent{
+		display:none;
+		width:140px;
+		background:#F6F;
+		height:100%;
+	}
+	
+	.comment:hover .comContent{
+		display:inline-block;
+	}
+
+	
 	</style>
     <script type="text/javascript">
         // Global variable to track current file name.
-        var currentFile = "";
-        function playAudio() {
+        var currentFile = "demo.mp3";
+		var inited = false;	// I hereby declare inited as being a real word of the english language. Shakespeare style
+		
+		function initAudio(){
+			var oAudio = document.getElementById('audioTag');
+			oAudio.src = currentFile;
+			oAudio.addEventListener("timeupdate", progressChecking, true);
+		}
+		
+        function toggleAudio() {
+			if(!inited){
+				initAudio();
+				inited = true;
+			}
             // Check for audio element support.
             if (window.HTMLAudioElement) {
                 try {
-                    var oAudio = document.getElementById('myaudio');
+                    var oAudio = document.getElementById('audioTag');
                     var btn = document.getElementById('play'); 
-                    var audioURL = document.getElementById('audiofile'); 
 
-                    //Skip loading if current file hasn't changed.
-                    if (audioURL.value !== currentFile) {
-                        oAudio.src = audioURL.value;
-                        currentFile = audioURL.value;                       
-                    }
-
-                    // Tests the paused attribute and set state. 
                     if (oAudio.paused) {
                         oAudio.play();
                         btn.textContent = "Pause";
@@ -54,67 +100,19 @@
 					oAudio.addEventListener("timeupdate", progressChecking, true);
                 }
                 catch (e) {
-                    // Fail silently but show in F12 developer tools console
                      if(window.console && console.error("Error:" + e));
                 }
-            }
-        }
-             // Rewinds the audio file by 30 seconds.
-
-        function rewindAudio() {
-             // Check for audio element support.
-            if (window.HTMLAudioElement) {
-                try {
-                    var oAudio = document.getElementById('myaudio');
-                    oAudio.currentTime -= 30.0;
-                }
-                catch (e) {
-                    // Fail silently but show in F12 developer tools console
-                     if(window.console && console.error("Error:" + e));
-                }
-            }
-        }
-
-             // Fast forwards the audio file by 30 seconds.
-
-        function forwardAudio() {
-
-             // Check for audio element support.
-            if (window.HTMLAudioElement) {
-                try {
-                    var oAudio = document.getElementById('myaudio');
-                    oAudio.currentTime += 30.0;
-                }
-                catch (e) {
-                    // Fail silently but show in F12 developer tools console
-                     if(window.console && console.error("Error:" + e));
-                }
-            }
-        }
-
-             // Restart the audio file to the beginning.
-
-        function restartAudio() {
-             // Check for audio element support.
-            if (window.HTMLAudioElement) {
-                try {
-                    var oAudio = document.getElementById('myaudio');
-                    oAudio.currentTime = 0;
-                }
-                catch (e) {
-                    // Fail silently but show in F12 developer tools console
-                     if(window.console && console.error("Error:" + e));
-               }
             }
         }
 		
 		function gotoAudio(event){
+			var offset = 0;
 			var totalWidth = window.document.getElementById("songVisualizer").clientWidth;
-			var percent = event.x/totalWidth;
+			var percent = (event.x - offset)/totalWidth;
 			
 			if (window.HTMLAudioElement) {
                 try {
-                    var oAudio = document.getElementById('myaudio');
+                    var oAudio = document.getElementById('audioTag');
                     oAudio.currentTime = percent*oAudio.duration;
                 }
                 catch (e) {
@@ -125,41 +123,38 @@
 		}
 		
 		function progressChecking(){
-			var oAudio = document.getElementById('myaudio');
+			var oAudio = document.getElementById('audioTag');
 			var totalWidth = window.document.getElementById("songVisualizer").clientWidth;
 			var percent = oAudio.currentTime/oAudio.duration;
 			
-			document.getElementsByClassName('playingBar')[0].setAttribute('style','left:'+percent*totalWidth+'px;');
+			var playingBars = document.getElementsByClassName('playingBar');
+			for(var i=0;i<playingBars.length;i++){
+			playingBars[i].setAttribute('style','left:'+percent*totalWidth+'px;');
+			}
 		}
 		
-		 
-            
     </script>
   </head>
   
   <body id="body">
-    <p>
-      <input type="text" id="audiofile" size="80" value="demo.mp3" />
-    </p>
-    <audio id="myaudio">
+    <audio id="audioTag">
       Get a decent browser
     </audio>
-    <button id="play" onclick="playAudio();">
+    <button id="play" onclick="toggleAudio();">
       Play
-    </button>
-    
-    <button onclick="rewindAudio();">
-      Rewind
-    </button>
-    <button onclick="forwardAudio();">
-      Fast forward
-    </button>
-    <button onclick="restartAudio();">
-      Restart
     </button>
 
 	<div id="songVisualizer" class="lengthSelector" onclick="gotoAudio(event)">
 	<div class="playingBar"></div>
+	</div>
+	<div class="comments">
+	<div class="comment">
+		<div class="pointer"></div>
+		<div class="comContent"> Ok lol </div>
+	</div>
+	</div>
+	<div id="graphsVisualizer" class="lengthSelector graphVisu">
+	<div class="playingBar visuBar"></div>
 	</div>
 	
   </body>
