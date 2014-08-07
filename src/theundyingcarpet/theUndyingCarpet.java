@@ -36,9 +36,9 @@ public class TheUndyingCarpet {
         TINNITUS
     }
     
-    public static final long clockStepInMs = 10;
+    public static final long clockStepInMs = 6;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
-    public static final long totalDurationMs = (long)((10./10)*300000);
+    public static final long totalDurationMs = (long)((6./10)*300000);
     public static final long totalDurationS = totalDurationMs/1000;
     
     
@@ -109,6 +109,10 @@ public class TheUndyingCarpet {
         // Init samples
         samples = new HashMap<String,FloatSample>();
         loadSample("Beat.wav");
+        loadSample("forkTreeShot_0.wav");
+        loadSample("forkTreeShot_1.wav");
+        loadSample("forkTreeShot_2.wav");
+        loadSample("forkTreeShot_3.wav");
         
         
         new DataRetriever();
