@@ -91,7 +91,7 @@ public class TheUndyingCarpet {
     }
     
     public static void loadSample(String fileName){
-        File file = new File(fileName);
+        File file = new File("Samples/"+fileName);
         FloatSample sample = null;
         try {
             sample = SampleLoader.loadFloatSample(file);
