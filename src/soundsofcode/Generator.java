@@ -1,4 +1,11 @@
-package theundyingcarpet;
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
+package soundsofcode;
 
 import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.ImpulseOscillatorBL;
@@ -8,7 +15,6 @@ import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
 import com.jsyn.unitgen.UnitOscillator;
 
-import theundyingcarpet.TheUndyingCarpet.NoteType;
 
 public class Generator {
     public static UnitOscillator generateInstrument(String instrumentName) {
@@ -45,7 +51,7 @@ public class Generator {
         return a;
     }
 
-    public static double getTypeAmplitudeFactor(NoteType noteType) {
+    public static double getTypeAmplitudeFactor(SoundsOfCode.NoteType noteType) {
         double a;
         switch (noteType) {
         case TINNITUS:
@@ -58,7 +64,7 @@ public class Generator {
         return a;
     }
 
-    public static SegmentedEnvelope generateEnveloppe(String instrumentName, NoteType noteType) {
+    public static SegmentedEnvelope generateEnveloppe(String instrumentName, SoundsOfCode.NoteType noteType) {
         double instrumentMax = getInstrumentAmplitudeFactor(instrumentName);
         double mixFactor = getTypeAmplitudeFactor(noteType);
         double maxAmpl = instrumentMax * mixFactor;

@@ -1,3 +1,10 @@
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
 import java.util.ArrayList;
 import java.util.Scanner;
 

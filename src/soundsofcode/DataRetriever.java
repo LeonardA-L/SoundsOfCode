@@ -1,4 +1,11 @@
-package theundyingcarpet;
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
+package soundsofcode;
 
 import com.jsyn.data.SegmentedEnvelope;
 
@@ -78,7 +85,7 @@ public class DataRetriever {
                 }
             } else { // It's a note
                 int frequency = Integer.parseInt(event[1]);
-                SegmentedEnvelope env = Generator.generateEnveloppe(event[2], TheUndyingCarpet.NoteType.REPO);
+                SegmentedEnvelope env = Generator.generateEnveloppe(event[2], soundsofcode.SoundsOfCode.NoteType.REPO);
                 UnitOscillator osc = Generator.generateInstrument(event[3]);
                 n = new Note(frequency, env, osc);
             }

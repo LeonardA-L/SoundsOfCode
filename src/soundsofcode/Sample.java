@@ -1,4 +1,11 @@
-package theundyingcarpet;
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
+package soundsofcode;
 
 public class Sample extends Note{
     private String sampleName;

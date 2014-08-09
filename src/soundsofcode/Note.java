@@ -1,4 +1,11 @@
-package theundyingcarpet;
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
+package soundsofcode;
 
 import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.UnitOscillator;
@@ -20,8 +27,8 @@ public class Note {
     // Tinnitus
     public Note(int frequency, UnitOscillator osc){
         double ramp = 0.05;
-        double totalMRamp = TheUndyingCarpet.totalDurationS - ramp;
-        double maxAmplitude = Generator.getTypeAmplitudeFactor(TheUndyingCarpet.NoteType.TINNITUS);
+        double totalMRamp = SoundsOfCode.totalDurationS - ramp;
+        double maxAmplitude = Generator.getTypeAmplitudeFactor(soundsofcode.SoundsOfCode.NoteType.TINNITUS);
         double[] enveloppeData =
             {
                 0.00, 0,

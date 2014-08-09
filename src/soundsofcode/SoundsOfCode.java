@@ -1,4 +1,11 @@
-package theundyingcarpet;
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
+package soundsofcode;
 
 import com.jsyn.*; // JSyn and Synthesizer classes
 
@@ -22,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class TheUndyingCarpet {
+public class SoundsOfCode {
     
     protected static LineOut lineOut;
     protected static WaveRecorder fileOut;

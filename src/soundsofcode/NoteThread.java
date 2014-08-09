@@ -1,4 +1,11 @@
-package theundyingcarpet;
+/*
+##############################################################
+## 	                Sounds Of Code	    	    	    ##
+##	        A GitHub Data Challenge III Entry	    ##
+##			  LeonardA-L			    ##
+##############################################################
+*/
+package soundsofcode;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
@@ -16,20 +23,20 @@ public class NoteThread implements Runnable {
         this.note = note;
         this.duration = note.getDuration();
         osc = note.getOsc();
+
+        SoundsOfCode.synth.add(osc);
         
-        TheUndyingCarpet.synth.add(osc);
-        
-        osc.output.connect(0, TheUndyingCarpet.lineOut.input, 0);
-        osc.output.connect(0, TheUndyingCarpet.lineOut.input, 1);
-        osc.output.connect(0, TheUndyingCarpet.fileOut.getInput(), 0);
-        osc.output.connect(0, TheUndyingCarpet.fileOut.getInput(), 1);
+        osc.output.connect(0, SoundsOfCode.lineOut.input, 0);
+        osc.output.connect(0, SoundsOfCode.lineOut.input, 1);
+        osc.output.connect(0, SoundsOfCode.fileOut.getInput(), 0);
+        osc.output.connect(0, SoundsOfCode.fileOut.getInput(), 1);
         
         osc.frequency.set(note.getFrequency());
         
         VariableRateMonoReader envPlayer = new VariableRateMonoReader();
         envPlayer.dataQueue.clear( );
         envPlayer.dataQueue.queue( note.getEnveloppe(), 0, note.getEnveloppe().getNumFrames() );
-        TheUndyingCarpet.synth.add(envPlayer);
+        SoundsOfCode.synth.add(envPlayer);
         envPlayer.output.connect( osc.amplitude );
         
         envPlayer.start();
@@ -43,11 +50,11 @@ public class NoteThread implements Runnable {
         } catch (InterruptedException e) {
         }
         osc.stop();
-        osc.output.disconnect(0, TheUndyingCarpet.lineOut.input, 0);
-        osc.output.disconnect(0, TheUndyingCarpet.lineOut.input, 1);
-        osc.output.disconnect(0, TheUndyingCarpet.fileOut.getInput(), 0);
-        osc.output.disconnect(0, TheUndyingCarpet.fileOut.getInput(), 1);
-        TheUndyingCarpet.synth.remove(osc);
+        osc.output.disconnect(0, SoundsOfCode.lineOut.input, 0);
+        osc.output.disconnect(0, SoundsOfCode.lineOut.input, 1);
+        osc.output.disconnect(0, SoundsOfCode.fileOut.getInput(), 0);
+        osc.output.disconnect(0, SoundsOfCode.fileOut.getInput(), 1);
+        SoundsOfCode.synth.remove(osc);
     }
 
     public void setOsc(UnitOscillator osc) {
