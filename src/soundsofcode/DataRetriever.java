@@ -19,24 +19,31 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * This class retrieves all events from the external CSV events file, and put them
+ * into the event tables
+ */
 public class DataRetriever {
 
-    public DataRetriever() {
-
-    }
-
+    /**
+     * Adds a note to the song table. Each entry in the table is a chained list of notes,
+     * so it will queue it if needed
+     * @param frame The time frame where the note shall be added
+     * @param note  the note to add
+     * @param noteTable the table to which the note should be added
+     */
     public static void addNote(int frame, Note note, Note[] noteTable) {
         if (noteTable[frame] == null) {
             noteTable[frame] = note;
         } else {
             Note n = null;
-            for (n = noteTable[frame]; n.getNext() != null; n = n.getNext()) {
-            } // Run through chained list with elegance
+            for (n = noteTable[frame]; n.getNext() != null; n = n.getNext()) {} // Run through chained list with elegance
             n.setNext(note);
         }
     }
 
     /*
+     // This method was a temporary table builder used before the actual file loading system was coded.
     public static Note[] temporaryTableBuilder() {
         SegmentedEnvelope enveloppe = TheUndyingCarpet.enveloppes.get("basic");
         // Temp : building the note table
@@ -54,13 +61,20 @@ public class DataRetriever {
     }
 */
 
+    /**
+     * Loads the event CSV file and fills the event tables given by reference.
+     * Calls handleEvent to handle an event (why am I even writing those comments ?)
+     * @param noteTable
+     * @param weeklyFrequency
+     */
     public static void loadTable(Note[] noteTable, int[] weeklyFrequency) {
-        //noteTable = new Note[(int)(TheUndyingCarpet.totalDurationMs / TheUndyingCarpet.clockStepInMs)];
         try {
+            // load the file
             File f = new File("events.csv");
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
+            // One event per line
             String l = br.readLine();
             while (l != null) {
                 String[] event = l.split(",");
@@ -68,11 +82,18 @@ public class DataRetriever {
                 l = br.readLine();
             }
             br.close();
+            fr.close();
         } catch (IOException e) {
             System.err.println("File not found");
         }
     }
 
+    /**
+     * Parses the line from the CSV event file and adds it where it belongs
+     * @param event
+     * @param noteTable
+     * @param weeklyFrequency
+     */
     private static void handleEvent(String[] event, Note[] noteTable, int[] weeklyFrequency) {
         try {
             int frame = Integer.parseInt(event[0]);
@@ -92,8 +113,12 @@ public class DataRetriever {
             if (n != null) {
                 addNote(frame, n, noteTable);
             }
-        } catch (Exception e) {
-
+        }
+        catch(NumberFormatException i){
+            System.err.println("You let the titles in the CSV file, didn'cha ?");
+        }
+        catch (Exception e) {
+            System.err.println("OH NOES ! exception while handling an event");
         }
     }
 }

@@ -13,6 +13,9 @@ import com.jsyn.unitgen.*;
 import com.jsyn.unitgen.UnitOscillator;
 import com.jsyn.unitgen.VariableRateMonoReader;
 
+/**
+ * A runnable object capable of async-ly playing a note
+ */
 public class NoteThread implements Runnable {
     
     private UnitOscillator osc;
@@ -23,9 +26,11 @@ public class NoteThread implements Runnable {
         this.note = note;
         this.duration = note.getDuration();
         osc = note.getOsc();
-
+        
+        // Add the instrument to the Sound System
         SoundsOfCode.synth.add(osc);
         
+        // Connect the outputs of the instrument to the speaker and the file output
         osc.output.connect(0, SoundsOfCode.lineOut.input, 0);
         osc.output.connect(0, SoundsOfCode.lineOut.input, 1);
         osc.output.connect(0, SoundsOfCode.fileOut.getInput(), 0);
@@ -33,6 +38,7 @@ public class NoteThread implements Runnable {
         
         osc.frequency.set(note.getFrequency());
         
+        // Create en connect an amplitude variator according to the right enveloppe
         VariableRateMonoReader envPlayer = new VariableRateMonoReader();
         envPlayer.dataQueue.clear( );
         envPlayer.dataQueue.queue( note.getEnveloppe(), 0, note.getEnveloppe().getNumFrames() );
@@ -40,15 +46,20 @@ public class NoteThread implements Runnable {
         envPlayer.output.connect( osc.amplitude );
         
         envPlayer.start();
-        //osc.amplitude.set(1);   // Will be computed from enveloppe
     }
 
+    /**
+     * Plays the note
+     */
     public void run() {
         osc.start();
         try {
             Thread.sleep((long)this.duration*1000);
         } catch (InterruptedException e) {
+            System.err.println("Damn.");
         }
+        
+        // Disconnect and clean everything
         osc.stop();
         osc.output.disconnect(0, SoundsOfCode.lineOut.input, 0);
         osc.output.disconnect(0, SoundsOfCode.lineOut.input, 1);
@@ -57,6 +68,8 @@ public class NoteThread implements Runnable {
         SoundsOfCode.synth.remove(osc);
     }
 
+    // ---- Accessors
+    
     public void setOsc(UnitOscillator osc) {
         this.osc = osc;
     }

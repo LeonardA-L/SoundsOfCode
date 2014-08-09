@@ -10,38 +10,45 @@ package soundsofcode;
 import com.jsyn.data.SegmentedEnvelope;
 import com.jsyn.unitgen.UnitOscillator;
 
+/**
+ * A note that can be played by a NoteThread. Containing frequency, enveloppe, and instrument.
+ */
 public class Note {
     private int frequency;
     private SegmentedEnvelope enveloppe;
+    // used for the chained list
     protected Note next;
     private UnitOscillator osc;
     
+    /**
+     * This constructor is called by Sample, a child object of Note, that only needs
+     * the "Note" class type and the chained list system
+     * @see Sample
+     */
     public Note(){}
     
+    /**
+     * Instanciates a note with the given parameters
+     * @param frequency
+     * @param enveloppe
+     * @param osc the instrument that plays it
+     */
     public Note(int frequency, SegmentedEnvelope enveloppe, UnitOscillator osc) {
         this.frequency = frequency;
         this.enveloppe = enveloppe;
         this.osc = osc;
     }
     
-    // Tinnitus
+    /**
+     * Tinnitus constructor
+     */
     public Note(int frequency, UnitOscillator osc){
-        double ramp = 0.05;
-        double totalMRamp = SoundsOfCode.totalDurationS - ramp;
-        double maxAmplitude = Generator.getTypeAmplitudeFactor(soundsofcode.SoundsOfCode.NoteType.TINNITUS);
-        double[] enveloppeData =
-            {
-                0.00, 0,
-                ramp, maxAmplitude,
-                totalMRamp,maxAmplitude,
-                ramp, 0
-            };
-        SegmentedEnvelope enveloppe = new SegmentedEnvelope( enveloppeData );
-        this.frequency = frequency;
-        this.enveloppe = enveloppe;
-        this.osc = osc;
+        this(frequency,null,osc);
+        this.enveloppe = Generator.generateEnveloppe("Ruby", SoundsOfCode.NoteType.TINNITUS);
     }
 
+    // --------- Accessors
+    
     public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
