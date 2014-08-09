@@ -13,6 +13,7 @@ public class SampleThread implements Runnable {
     public void run(){
         VariableRateMonoReader samplePlayer = new VariableRateMonoReader();
         samplePlayer.dataQueue.queue( sample, 0, sample.getNumFrames() );
+        samplePlayer.amplitude.set(0.7);
         TheUndyingCarpet.synth.add(samplePlayer);
         samplePlayer.start();
         samplePlayer.rate.set( sample.getFrameRate() );

@@ -12,9 +12,9 @@
 	.lengthSelector{
 		position:relative;
 		width:100%;
-		background:#F66;
-		height:150px;
-		
+		background:#EFE url(./sound_bg.png) bottom center no-repeat;
+		background-size: 100% 150px;
+		height:170px;
 		cursor:pointer;
 	}
 	.graphVisu{
@@ -89,7 +89,7 @@
 	}
 	
 	.header{
-		height:200px;
+		height:220px;
 		overflow:hidden;
 		
 		width:100%;
@@ -200,6 +200,7 @@
 		function progressChecking(){
 			var oAudio = document.getElementById('audioTag');
 			var totalWidth = window.document.getElementById("songVisualizer").clientWidth;
+			console.log(totalWidth);
 			var percent = oAudio.currentTime/oAudio.duration;
 			
 			var playingBars = document.getElementsByClassName('playingBar');
@@ -209,9 +210,9 @@
 		}
 		
 		function toggleGraphs(){
-			var headerHeight = 200;
+			var headerHeight = 220;
 			if(!graphOpen){
-				headerHeight = 350;
+				headerHeight = 370;
 			}
 			graphOpen = !graphOpen;
 			document.getElementsByClassName('header')[0].setAttribute('style','height:'+headerHeight+'px');
