@@ -48,12 +48,12 @@ LIMIT 5000)
 /* ### Events per week (6 GB) */
 /*##############################################################*/
 SELECT UTC_USEC_TO_WEEK(TIMESTAMP_TO_USEC(created_at),1) as monday, COUNT(*) as events
-FROM (SELECT created_at FROM [githubarchive:github.timeline] LIMIT 50) a
+FROM (SELECT created_at FROM [githubarchive:github.timeline])
 GROUP BY monday
 /*##############################################################*/
 
 
-/* ### Get the global size of GitHub's repositories on a given day 7 GB */
+/* ### Get the global size of GitHub's repositories on a given day 6.5 GB */
 /*
 Note that, having 140+ GB of data in the githubarchive dataset, trying to do a cartesian product
 to get the size for each day would cause Google BigQueries' ressources to exceed.
@@ -81,11 +81,11 @@ LIMIT 200
 /* Get the URL of a repo created at a given time.
 Used to find *that* repository with a 30 pushes per second frequency*/
 SELECT repository_url FROM
-(SELECT repository_created_at, repository_url FROM [publicdata:samples.github_timeline])
+(SELECT repository_created_at, repository_url FROM [githubarchive:github.timeline])
 WHERE TIMESTAMP_TO_SEC(TIMESTAMP(repository_created_at)) = 1335671558
 
 /* Top 1000 Star Ranking */
-SELECT count(type) as stars, repository_url FROM [publicdata:samples.github_timeline]
+SELECT count(type) as stars, repository_url FROM [githubarchive:github.timeline]
 WHERE type = 'WatchEvent'
 GROUP BY repository_url
 ORDER BY stars DESC
