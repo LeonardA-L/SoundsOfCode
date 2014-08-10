@@ -102,6 +102,9 @@ public class DataRetriever {
                 try {
                     weeklyFrequency[frame] = Integer.parseInt(event[1]);
                 } catch (NumberFormatException e) {
+                    if(SoundsOfCode.samples.get(event[1]) == null){
+                        SoundsOfCode.loadSample(event[1]);
+                    }
                     n = new Sample(event[1]);
                 }
             } else { // It's a note

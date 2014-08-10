@@ -155,12 +155,14 @@ public class SoundsOfCode {
         
         // Load the samples
         samples = new HashMap<String,FloatSample>();
+        // Now automatic (ooh yeah)
+        /*
         loadSample("Beat.wav");
         loadSample("forkTreeShot_0.wav");
         loadSample("forkTreeShot_1.wav");
         loadSample("forkTreeShot_2.wav");
         loadSample("forkTreeShot_3.wav");
-        
+        */
         
         // Initialize the sound system (NZ NZ NZ)
         synth = JSyn.createSynthesizer();
