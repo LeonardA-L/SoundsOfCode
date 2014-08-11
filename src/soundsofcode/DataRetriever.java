@@ -95,8 +95,9 @@ public class DataRetriever {
      * @param weeklyFrequency
      */
     private static void handleEvent(String[] event, Note[] noteTable, int[] weeklyFrequency) {
+        int frame=-1;
         try {
-            int frame = Integer.parseInt(event[0]);
+            frame = Integer.parseInt(event[0]);
             Note n = null;
             if (event.length == 2) { // it's a sample
                 try {
@@ -121,7 +122,10 @@ public class DataRetriever {
             System.err.println("You let the titles in the CSV file, didn'cha ?");
         }
         catch (Exception e) {
-            System.err.println("OH NOES ! exception while handling an event");
+            System.err.println("OH NOES ! exception while handling an event : "+frame);
+            if(frame >= SoundsOfCode.totalDurationMs/SoundsOfCode.clockStepInMs || frame < 0){
+                System.err.println("You're outta time buddy");
+            }
         }
     }
 }
