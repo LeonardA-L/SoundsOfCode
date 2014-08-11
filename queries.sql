@@ -9,7 +9,8 @@
 
 After each query name is given a number indicating roughly how
 much Byte this query will take from your daily quota in Google
-BigQuery.
+BigQuery. And execution time too, to know if you've got time 
+to get coffee
 
 If there's a risk you exceed your daily quota by testing on
 the (huge) githubarchive dataset, you can test your queries
@@ -19,7 +20,7 @@ actually running them on the real base.
 
 /* ---- Queries actually used in the project */
 
-/* ### X's fork tree (10 GB) */
+/* ### X's fork tree (10 GB, 5s) */
 /*##############################################################*/
 /* Put to a GraphViz format*/
 SELECT repository_owner+" -> "+actor_attributes_login
@@ -30,7 +31,7 @@ AND repository_name = 'BrowserQuest'
 AND repository_owner != 'mozilla'
 /*##############################################################*/
 
-/* ### TOP 5000 Repo by Push Frequency (12.8 GB) */
+/* ### TOP 5000 Repo by Push Frequency (12.8 GB, 14s) */
 /*##############################################################*/
 SELECT pushes, LastPushDate, repository_created_at, repository_language FROM
 (SELECT pushes, LastPushDate, repository_created_at, repository_language, pushes*1000/(LastPushDate - repository_created_at) as freq FROM(
@@ -45,15 +46,15 @@ ORDER BY freq DESC
 LIMIT 5000)
 /*##############################################################*/
 
-/* ### Events per week (6 GB) */
+/* ### Events per week (5 GB, 10s) */
 /*##############################################################*/
-SELECT UTC_USEC_TO_WEEK(TIMESTAMP_TO_USEC(created_at),1) as monday, COUNT(*) as events
+SELECT UTC_USEC_TO_WEEK(TIMESTAMP_TO_USEC(TIMESTAMP(created_at)),1) as monday, COUNT(*) as events
 FROM (SELECT created_at FROM [githubarchive:github.timeline])
 GROUP BY monday
 /*##############################################################*/
 
 
-/* ### Get the global size of GitHub's repositories on a given day 6.5 GB */
+/* ### Get the global size of GitHub's repositories on a given day (6.5 GB) */
 /*
 Note that, having 140+ GB of data in the githubarchive dataset, trying to do a cartesian product
 to get the size for each day would cause Google BigQueries' ressources to exceed.
