@@ -40,11 +40,11 @@ public class Note {
     }
     
     /**
-     * Tinnitus constructor
+     * Baseline constructor
      */
     public Note(int frequency, UnitOscillator osc){
         this(frequency,null,osc);
-        this.enveloppe = Generator.generateEnveloppe("Ruby", SoundsOfCode.NoteType.TINNITUS);
+        this.enveloppe = Generator.generateEnveloppe("Ruby", SoundsOfCode.NoteType.BASELINE);
     }
 
     // --------- Accessors

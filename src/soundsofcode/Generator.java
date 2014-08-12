@@ -74,7 +74,7 @@ public class Generator {
     public static double getTypeAmplitudeFactor(SoundsOfCode.NoteType noteType) {
         double a;
         switch (noteType) {
-        case TINNITUS:
+        case BASELINE:
             a = 0.25;
         break;
         case REPO:
@@ -95,7 +95,7 @@ public class Generator {
         double mixFactor = getTypeAmplitudeFactor(noteType);
         double maxAmpl = instrumentMax * mixFactor;
         switch (noteType) {
-        case TINNITUS:
+        case BASELINE:
             double ramp = 0.05;
             double totalMRamp = SoundsOfCode.totalDurationS - ramp;
             double[] enveloppeBaseLineData =

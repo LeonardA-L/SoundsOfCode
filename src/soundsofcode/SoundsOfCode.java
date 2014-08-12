@@ -37,12 +37,12 @@ public class SoundsOfCode {
     protected static WaveRecorder fileOut;
     protected static Synthesizer synth;
     protected static ArrayList<Thread> runningThreads;
-    protected static UnitOscillator tinnitusInstrument;
+    protected static UnitOscillator baselineInstrument;
     protected static Map<String,FloatSample> samples;
     
     public enum NoteType{
         REPO,
-        TINNITUS
+        BASELINE
     }
     
     public static final long clockStepInMs = 6;
@@ -54,8 +54,8 @@ public class SoundsOfCode {
      * Updates the frequency of the base note
      * @param frequency the new frequency to apply
      */
-    public static void setTinnitusFrequency(int frequency){
-        tinnitusInstrument.frequency.set(frequency);
+    public static void setBaselineFrequency(int frequency){
+        baselineInstrument.frequency.set(frequency);
     }
     
     /**
@@ -81,10 +81,10 @@ public class SoundsOfCode {
     /**
      * Plays the event table, i.e the entire music. Each entry in this table is a chained list of notes
      * @param noteTab   The event table
-     * @param tinnitusFrequencies   the list of frequency-change events for the baseline
+     * @param baselineFrequencies   the list of frequency-change events for the baseline
      * @see Note
      */
-    public static void playTable(Note[] noteTab, int[] tinnitusFrequencies){
+    public static void playTable(Note[] noteTab, int[] baselineFrequencies){
         long a = System.nanoTime();
         long b = a;
         for(int i=0;i<noteTab.length;i++){
@@ -95,8 +95,8 @@ public class SoundsOfCode {
                 playNote(n);
             }
             // If needed, update the baseline frequency
-            if(tinnitusFrequencies[i] != 0){   // Tinnitus
-                setTinnitusFrequency(tinnitusFrequencies[i]);
+            if(baselineFrequencies[i] != 0){   // Baseline
+                setBaselineFrequency(baselineFrequencies[i]);
             }
             
             /*
@@ -186,14 +186,14 @@ public class SoundsOfCode {
         
         // Initialize the baseline
         // See wiki page 
-        Note tinnitus = new Note(110, new TriangleOscillator());
-        //playNote(tinnitus);
+        Note baseline = new Note(110, new TriangleOscillator());
+        //playNote(baseline);
         // Manually playing note
-        NoteThread nt = new NoteThread(tinnitus);
+        NoteThread nt = new NoteThread(baseline);
         Thread th = new Thread(nt);
         th.start();
         runningThreads.add(th);
-        tinnitusInstrument = nt.getOsc();
+        baselineInstrument = nt.getOsc();
         
         
         //---- Retrieve data from the events list
