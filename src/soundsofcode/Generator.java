@@ -22,7 +22,7 @@ public class Generator {
     
     /**
      * Instanciates an oscillator corresponding to a given instrument name
-     * Each language has its own instrument (See wiki page )
+     * Each language has its own instrument
      * @param instrumentName
      * @return a Jsyn oscillator corresponding to the given instrument name
      */
@@ -67,7 +67,7 @@ public class Generator {
     }
 
     /**
-     * Each element (See wiki page ) has an amplitude, to have things on different layers
+     * Each element (See wiki page Elements) has an amplitude, to have things on different layers
      * @param noteType
      * @return the amplitude of the element
      */

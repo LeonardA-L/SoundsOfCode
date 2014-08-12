@@ -185,7 +185,7 @@ public class SoundsOfCode {
         fileOut.start();
         
         // Initialize the baseline
-        // See wiki page 
+        // See wiki page Baseline
         Note baseline = new Note(110, new TriangleOscillator());
         //playNote(baseline);
         // Manually playing note

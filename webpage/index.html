@@ -120,6 +120,27 @@
 		padding-top:230px;
 	}
 	
+	.title{
+		position: fixed;
+		z-index:10;
+		background: url(bg.png)repeat-x top left;
+		width:100%;
+		height:150px;
+		color:#FFF;
+		font-weight:100;
+		pointer-events:none;
+		
+		text-align:center;
+	}
+	
+	h1{	
+		margin:0;
+	}
+	
+	.buttonBar{
+		background: url(shade.png)repeat-x top left;
+	}
+	
 	</style>
     <script type="text/javascript">
         // Global variable to track current file name.
@@ -224,6 +245,7 @@
   
   <body id="body">
 	<div class="head">
+	<div class="title"><h1>Sounds Of Code</h1></div>
 	<div class="header">
 			<audio id="audioTag">
 			  Get a decent browser
@@ -231,9 +253,7 @@
 		<div class="headerContent">
 			<div id="songVisualizer" class="lengthSelector" onclick="gotoAudio(event)">
 			<div class="playingBar"></div>
-			<button id="play" onclick="toggleAudio(event);">
-			  Play
-			</button>
+			
 			</div>
 			<div class="comments">
 			
@@ -253,10 +273,13 @@
 			</div>
 		</div>
 	</div>
-	<div>
+	<div class="buttonBar">
 		<button id="showGraphs" onclick="toggleGraphs();">
 			I want graphz
 		</button>
+		<button id="play" onclick="toggleAudio(event);">
+			  Play
+			</button>
 	</div>
 	</div>
 	<div class="body">
