@@ -1,7 +1,7 @@
 <html>
   
   <head>
-    <title>The Undying Carpet</title>
+    <title>Sounds Of Code - Press play to start</title>
 	<style>
 	#body{
 		padding:0;
@@ -12,18 +12,18 @@
 	.lengthSelector{
 		position:relative;
 		width:100%;
-		background:#EFE url(./sound_bg.png) bottom center no-repeat;
-		background-size: 100% 150px;
+		background:url(./sound_bg.png) center center no-repeat;
+		background-size: 100% 90px;
 		height:170px;
 		cursor:pointer;
 	}
 	.graphVisu{
-		background:#6F6;
+		background:#FFFEFE;
 	}
 	.playingBar{
 		position:absolute;
 		top:0;
-		background:#66F;
+		background:#F66;
 		width:3px;
 		height:100%;
 		z-index:1;
@@ -35,7 +35,7 @@
 	.comments{
 		position:relative;
 		height:50px;
-		background:#EEE;
+		background:#BCF;
 	}
 	
 	.comment{
@@ -79,10 +79,6 @@
 	}
 	
 	
-	#play{
-		position:absolute;
-		z-index:3;
-	}
 	
 	.headerContent{
 		width:100%;
@@ -91,7 +87,8 @@
 	.header{
 		height:220px;
 		overflow:hidden;
-		
+		background: url(bgHeader.png) top left repeat-x;
+		background-size:auto 200px;
 		width:100%;
 		
 			/* For Safari 3.1 to 6.0 */
@@ -109,15 +106,22 @@
 		width:100%;
 	}
 	
-	
+	.body, .footer{
+		width:70%;
+		margin:0 auto;
+	}
 	
 	.body{
-		background:#FFFFFF;
-		width:80%;
-		margin:0 auto;
-		margin-bottom:20px;
+		background:#FEFEFF;
 		padding:30px;
 		padding-top:230px;
+		
+		text-align:justify;
+	}
+	
+	.footer{
+		margin-bottom:20px;
+		text-align:center;
 	}
 	
 	.title{
@@ -139,7 +143,17 @@
 	
 	.buttonBar{
 		background: url(shade.png)repeat-x top left;
+		width:100%;
+		height:40px;
 	}
+	
+	.btnWrap{
+		margin-right:12%;
+		float:right;
+		text-align:left;
+		width:auto;
+	}
+	
 	
 	</style>
     <script type="text/javascript">
@@ -274,52 +288,47 @@
 		</div>
 	</div>
 	<div class="buttonBar">
-		<button id="showGraphs" onclick="toggleGraphs();">
-			I want graphz
-		</button>
-		<button id="play" onclick="toggleAudio(event);">
-			  Play
+		<div class="btnWrap">
+			<button id="play" onclick="toggleAudio(event);">
+				  Play
 			</button>
+			<button id="beautif" onclick="">
+				  beautify
+			</button>
+			<button id="showGraphs" onclick="toggleGraphs();">
+				I want graphz
+			</button>
+			
+			
+		</div>
 	</div>
 	</div>
 	<div class="body">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
-
-Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
-
-Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
-
-Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
-
-Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
-
-Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
-
-Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
-
-Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
-
-Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
-
-Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
-
-Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
-
-Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
-
-Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis condimentum ipsum, id venenatis velit facilisis vitae. Etiam non urna quis justo euismod hendrerit ut a magna. Praesent imperdiet pellentesque erat, in tempor felis egestas vel. Morbi elit augue, sagittis id purus eu, consequat lobortis sem. Etiam accumsan in quam in viverra. Nulla consectetur, leo vitae interdum ultrices, massa quam fermentum nisi, semper sodales velit orci a quam. Vivamus ac orci ac lacus rutrum fermentum. Ut sit amet lorem id erat ornare sagittis bibendum vel turpis. Vestibulum sapien quam, suscipit id pretium in, condimentum eget nunc. Pellentesque vel felis mollis, auctor neque sit amet, egestas dolor.
-
-Donec vel lorem diam. Integer pretium orci nisi, non tempus nibh tempor non. In hac habitasse platea dictumst. Aenean dignissim et sapien et vulputate. Fusce tempus orci magna, sed dapibus diam fermentum ut. Aliquam egestas a ipsum a porta. Nullam sed urna id lacus rhoncus pretium ut quis enim. Vivamus vel vulputate mauris. Proin eget libero a massa facilisis porta vel quis dui.
-
-Ut dictum nibh commodo laoreet dignissim. Nullam scelerisque id urna rhoncus lobortis. Nulla ac erat sed lorem tincidunt condimentum at non massa. Quisque elit dolor, congue in luctus sed, feugiat et magna. Phasellus porttitor arcu ut eros rhoncus dignissim. Donec ut facilisis justo. Phasellus non nisl dictum, vehicula mauris eu, egestas magna. Morbi volutpat odio ut est fringilla, vel vulputate arcu tempor. In hac habitasse platea dictumst. Mauris rutrum urna mauris, nec volutpat urna commodo et.
-
-Quisque gravida eget eros nec ultricies. Nullam vehicula mi non gravida egestas. Fusce elementum pharetra tellus, ut blandit magna posuere non. Phasellus consectetur a libero et faucibus. Mauris vitae quam ligula. Nulla mattis odio ac orci ultrices hendrerit. Nulla viverra sem lorem, quis aliquam orci ultricies in. Morbi tristique, enim ut fermentum aliquet, lorem velit facilisis nisi, id accumsan nunc ligula non augue. Suspendisse fringilla elementum sapien non pellentesque. Fusce ultrices iaculis justo, interdum varius magna egestas ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam malesuada lacus ac nibh feugiat commodo.
-
-Nam nec venenatis arcu. Proin ut faucibus erat. In ut semper ante. Aenean a accumsan purus. Donec ac gravida libero, id commodo est. Proin porttitor in neque eu euismod. Duis erat purus, commodo sed turpis at, tristique venenatis massa. Aliquam eleifend vestibulum diam mattis faucibus. Etiam eu ornare metus. 
+	<h2>Sounds of Code - Press play to start</h2>
+	<p>
+	A musical representation of GitHub's activity timeline.<br />
+	... Or at least an attempt to make it musical.
+	</p>
+	<h3>What's that ?</h3>
+	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from 
+	data harvested from the GitHub Archive timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years. 
+	Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
+	This project represents as sound, in a chronological order, GitHub. A musical log journal.</p>
+	<h3>It sounds awful</h3>
+	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
+	music. But I tried to make it a little better with a "beautified" version, that at least fixes the problem of the mismatching frequencies. You 
+	can play it right now on this very page by clicking on this button :</p>
+	<button>Beautify</button>
+	<p>And yes, it's still not pleasant to hear.</p>
+	<h3>Is there more about this ?</h3>
+	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was done as an entry for the Annual GitHub Data Challenge 
+	(2014 edition). It thus comes with a nice <a href="#">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and even contribute. 
+	You can get lots of information on the <a href="#">project's wiki</a>, like long and boring texts explaining what exactly the elements in the music 
+	represent, instructions to do your very own version and cool links to cool stuff.<br />
+	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out wwhat the other participants to the 
+	challenge did :)</p>
 	</div>
+	<div class="footer">A project by <a href="#">LeonardA-L</a></div>
   </body>
 
 </html>
