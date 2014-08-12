@@ -35,7 +35,7 @@
 	.comments{
 		position:relative;
 		height:50px;
-		background:#BCF;
+		background:#b7d3d9;
 	}
 	
 	.comment{
@@ -148,12 +148,53 @@
 	}
 	
 	.btnWrap{
-		margin-right:12%;
+		/*margin-right:12%;*/
 		float:right;
 		text-align:left;
 		width:auto;
 	}
 	
+	.button{
+		width:85px;
+		height:35px;
+		display:inline-block;
+		margin-left:-9px;
+		margin-top:1px;
+	}
+	
+	.btnP{
+		background:url(btnP.png) top center no-repeat;
+	}
+	.btnP:hover{
+		background:url(btnPH.png) top center no-repeat;
+	}
+	
+	.btnB{
+		background:url(btnB.png) top center no-repeat;
+	}
+	.btnB:hover{
+		background:url(btnBH.png) top center no-repeat;
+	}
+	
+	.btnG{
+		background:url(btnG.png) top center no-repeat;
+	}
+	.btnG:hover{
+		background:url(btnGH.png) top center no-repeat;
+	}
+	
+	.beautyButtonWrap{
+		vertical-align:top;
+	}
+	
+	.notThisOne{
+		display:inline-block;
+		height:35px;
+		vertical-align:top;
+		padding-top:5px;
+		margin-left:10px;
+		display:none;
+	}
 	
 	</style>
     <script type="text/javascript">
@@ -199,11 +240,9 @@
 
                     if (oAudio.paused) {
                         oAudio.play();
-                        btn.textContent = "Pause";
                     }
                     else {
                         oAudio.pause();
-                        btn.textContent = "Play";
                     }
 					
 					oAudio.addEventListener("timeupdate", progressChecking, true);
@@ -254,6 +293,7 @@
 			
 		}
 		
+		
     </script>
   </head>
   
@@ -289,15 +329,12 @@
 	</div>
 	<div class="buttonBar">
 		<div class="btnWrap">
-			<button id="play" onclick="toggleAudio(event);">
-				  Play
-			</button>
-			<button id="beautif" onclick="">
-				  beautify
-			</button>
-			<button id="showGraphs" onclick="toggleGraphs();">
-				I want graphz
-			</button>
+			<span class="button btnP" id="play" onclick="toggleAudio(event);">
+			</span>
+			<span class="button btnB" id="beautif" onclick="">
+			</span>
+			<span class="button btnG" id="getGraphz" onclick="toggleGraphs();">
+			</span>
 			
 			
 		</div>
@@ -317,15 +354,15 @@
 	<h3>It sounds awful</h3>
 	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
 	music. But I tried to make it a little better with a "beautified" version, that at least fixes the problem of the mismatching frequencies. You 
-	can play it right now on this very page by clicking on this button :</p>
-	<button>Beautify</button>
+	can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick=""></span></p>
+	<p class="beautyButtonWrap"></p>
 	<p>And yes, it's still not pleasant to hear.</p>
 	<h3>Is there more about this ?</h3>
 	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was done as an entry for the Annual GitHub Data Challenge 
 	(2014 edition). It thus comes with a nice <a href="#">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and even contribute. 
 	You can get lots of information on the <a href="#">project's wiki</a>, like long and boring texts explaining what exactly the elements in the music 
 	represent, instructions to do your very own version and cool links to cool stuff.<br />
-	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out wwhat the other participants to the 
+	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out what the other participants to the 
 	challenge did :)</p>
 	</div>
 	<div class="footer">A project by <a href="#">LeonardA-L</a></div>
