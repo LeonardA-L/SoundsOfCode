@@ -47,7 +47,7 @@ public class SoundsOfCode {
     
     public static final long clockStepInMs = 6;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
-    public static final long totalDurationMs = (long)((6./10)*300000);
+    public static final long totalDurationMs = (long)(((double)clockStepInMs/10)*300000);
     public static final long totalDurationS = totalDurationMs/1000;
     
     /**

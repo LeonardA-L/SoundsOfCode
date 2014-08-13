@@ -77,9 +77,9 @@ public class DataRetriever {
             // One event per line
             String l = br.readLine();
             while (l != null) {
-                String[] event = l.split(",");
-                handleEvent(event, noteTable, weeklyFrequency);
-                l = br.readLine();
+                    String[] event = l.split(",");
+                    handleEvent(event, noteTable, weeklyFrequency);
+                    l = br.readLine();
             }
             br.close();
             fr.close();

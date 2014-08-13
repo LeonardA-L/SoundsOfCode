@@ -9,6 +9,7 @@
 		font-family: Lato, sans-serif !important;
 		background:#ecf0f1;
 		color:#2c3e69;
+		text-align:justify;
 	}
 	.lengthSelector{
 		position:relative;
@@ -20,6 +21,7 @@
 	}
 	.graphVisu{
 		background:#FFFEFE;
+		height:150px;
 	}
 	.playingBar{
 		position:absolute;
@@ -65,13 +67,15 @@
 		left:25px;
 		margin-top:-100px;
 		display:inline-block;
-		width:275px;
-		background:#95a5a6;
-		color:#FFF;
+		width:250px;
 		height:100px;
+		background:#3498db;
+		color:#FFF;
+		
 		z-index:10;
-		padding:5px;
+		padding:10px;
 		visibility: hidden;
+		text-align:justify;
 	}
 	
 	.hangLeft{
@@ -194,6 +198,36 @@
 		visibility: visible;
 	}
 	
+	.clickable{
+		background:rgba(0,0,0,0.01);
+		pointer-events:auto !important;
+	}
+	
+	.graph{
+		width:100%;
+		height:100%;
+		position: absolute;
+		pointer-events:none;
+	}
+	
+	.graphBtns{
+		width:100%;
+		position: absolute;
+		bottom:0;
+	}
+	
+	.baseline{
+		background:url(graphs/baseline.png) center center no-repeat;
+		background-size: 100% 90px;
+	}
+	.repos{
+		background:url(graphs/repos.png) center center no-repeat;
+		background-size: 100% 90px;
+	}
+	.beats{
+		background:url(graphs/beats.png) center center no-repeat;
+		background-size: 100% 90px;
+	}
 	</style>
 	<script src="jquery-1.11.1.min.js"></script>
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
@@ -201,7 +235,12 @@
 
     <script type="text/javascript">
         // Global variable to track current file name.
-        var currentFile = "demo.mp3";
+        
+		var demo = "soc_demo.mp3";
+		var beautif = "soc_beautified.mp3";
+		
+		var currentFile = demo;
+		
 		var inited = false;	// I hereby declare inited as being a real word of the english language. Shakespeare style
 		var graphOpen = false;
 		var comments = window.document.getElementsByClassName('pointer');
@@ -221,32 +260,37 @@
 			comContents = window.document.getElementsByClassName('comContent');
 			for(var i = 0; i< comments.length;i++){
 				comments[i].i = i;
-				comments[i].element = comContents[i];
 				comments[i].onmouseover = function(e) {
-					/*
-					this.element.style.display="inline-block";
-					this.element.style.height="100px !important";
-					this.element.style.width = "275px !important";
-					console.log(this.element.style);
-					//callTimeOutOnToolTip(this.element);
-					console.log('k');
-					*/
 					$($('.comContent')[this.i]).toggleClass('displayed');
 				};
 				
 				comments[i]	.onmouseout = function(e){
-					//this.element.style.display="";
 					$($('.comContent')[this.i]).toggleClass('displayed');
 				}
 			}
 		}, 0);
 		
-		setTimeout(function(){
+		function launchAudio(){
 			var oAudio = document.getElementById('audioTag');
 			oAudio.src = currentFile;
 			oAudio.addEventListener("timeupdate", progressChecking, true);
 			inited=true;
-		},0);
+			oAudio.addEventListener("timeupdate", progressChecking, true);
+		}
+		
+		setTimeout(launchAudio,0);
+		
+		function toggleMp3(){
+			if(currentFile === demo){
+				currentFile = beautif;
+			}
+			else{
+				currentFile = demo;
+			}
+			launchAudio();
+			var oAudio = document.getElementById('audioTag');
+			oAudio.play();
+		}
 		
         function toggleAudio(event) {
 			event.stopPropagation();
@@ -262,8 +306,6 @@
                     else {
                         oAudio.pause();
                     }
-					
-					oAudio.addEventListener("timeupdate", progressChecking, true);
                 }
                 catch (e) {
                      if(window.console && console.error("Error:" + e));
@@ -340,8 +382,17 @@
 			
 			
 			</div>
-			<div id="graphsVisualizer" class="lengthSelector graphVisu" onclick="gotoAudio(event)">
+			<div id="graphsVisualizer" class="lengthSelector graphVisu">
+				<div class="graph clickable" onclick="gotoAudio(event)"></div>
 				<div class="playingBar visuBar"></div>
+				<div class="graph baseline"></div>
+				<div class="graph repos"></div>
+				<div class="graph beats"></div>
+				<div class="graphBtns">
+					<button>Overall Activity</button>
+					<button>Repositories</button>
+					<button>1.4 TB Upload thresholds</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -349,7 +400,7 @@
 		<div class="btnWrap">
 			<span class="button btnP" id="play" onclick="toggleAudio(event);">
 			</span>
-			<span class="button btnB" id="beautif" onclick="">
+			<span class="button btnB" id="beautif" onclick="toggleMp3()">
 			</span>
 			<span class="button btnG" id="getGraphz" onclick="toggleGraphs();">
 			</span>
@@ -372,7 +423,7 @@
 	<h3>It sounds awful</h3>
 	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
 	music. But I tried to make it a little better with a "beautified" version, that at least fixes the problem of the mismatching frequencies. You 
-	can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick=""></span></p>
+	can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
 	<p class="beautyButtonWrap"></p>
 	<p>And yes, it's still not pleasant to hear.</p>
 	<h3>Is there more about this ?</h3>
