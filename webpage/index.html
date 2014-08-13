@@ -6,7 +6,7 @@
 	#body{
 		padding:0;
 		margin:0;
-		
+		font-family: Lato, sans-serif !important;
 		background:#ecf0f1;
 		color:#2c3e69;
 	}
@@ -48,12 +48,11 @@
 	}
 	
 	.pointer, .comContent{
-		display:inline-block;
 		vertical-align:top;
-		
 	}
 	
 	.pointer{
+		display:inline-block;
 		width:20px;
 		height:40px;
 		background: url(Pointer.png) no-repeat center center;
@@ -65,13 +64,14 @@
 		float:left;
 		left:25px;
 		margin-top:-100px;
-		display:none;
+		display:inline-block;
 		width:275px;
 		background:#95a5a6;
 		color:#FFF;
 		height:100px;
 		z-index:10;
 		padding:5px;
+		visibility: hidden;
 	}
 	
 	.hangLeft{
@@ -109,7 +109,7 @@
 	}
 	
 	.body, .footer{
-		width:70%;
+		width:65%;
 		margin:0 auto;
 	}
 	
@@ -190,32 +190,54 @@
 		vertical-align:top;
 	}
 	
-
+	.displayed{
+		visibility: visible;
+	}
 	
 	</style>
+	<script src="jquery-1.11.1.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
     <script type="text/javascript">
         // Global variable to track current file name.
         var currentFile = "demo.mp3";
 		var inited = false;	// I hereby declare inited as being a real word of the english language. Shakespeare style
 		var graphOpen = false;
+		var comments = window.document.getElementsByClassName('pointer');
 		
 		var comContents;
 		//visibility:visible;
 		var callTimeOutOnToolTip = function(element){
 			setTimeout(function(){
-				element.style.display="none";
+				if(element.style.display === 'inline-block'){
+					element.style.display="none";
+				}
 			},4000);
 		};
 		
 		setTimeout(function(){
-			var comments = window.document.getElementsByClassName('pointer');
+			
 			comContents = window.document.getElementsByClassName('comContent');
 			for(var i = 0; i< comments.length;i++){
 				comments[i].i = i;
+				comments[i].element = comContents[i];
 				comments[i].onmouseover = function(e) {
-					comContents[this.i].style.display="inline-block";
-					callTimeOutOnToolTip(comContents[this.i]);
+					/*
+					this.element.style.display="inline-block";
+					this.element.style.height="100px !important";
+					this.element.style.width = "275px !important";
+					console.log(this.element.style);
+					//callTimeOutOnToolTip(this.element);
+					console.log('k');
+					*/
+					$($('.comContent')[this.i]).toggleClass('displayed');
 				};
+				
+				comments[i]	.onmouseout = function(e){
+					//this.element.style.display="";
+					$($('.comContent')[this.i]).toggleClass('displayed');
+				}
 			}
 		}, 0);
 		
@@ -309,11 +331,11 @@
 			
 			<div class="comment" style="left:80%">
 				<div class="pointer"></div>
-				<div class="comContent hangLeft"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
+				<div id="cc0" class="comContent hangLeft"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
 			</div>
-			<div class="comment" style="left:0%">
+			<div class="comment" style="left:24%">
 				<div class="pointer"></div>
-				<div class="comContent"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
+				<div id="cc1" class="comContent"> To help you bear with this calm and empty Autumn 2012, I raise you mozilla's <a href="#">BrowserQuest</a>'s <a href="#">Forktree</a></div>
 			</div>
 			
 			
