@@ -19,6 +19,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import java.util.Scanner;
+
 /**
  * This class retrieves all events from the external CSV events file, and put them
  * into the event tables
@@ -67,9 +69,9 @@ public class DataRetriever {
      * @param noteTable
      * @param weeklyFrequency
      */
-    public static void loadTable(Note[] noteTable, int[] weeklyFrequency) {
+    public static void loadTableFromFile(Note[] noteTable, int[] weeklyFrequency) {
         try {
-            // load the file
+            // Load the file
             File f = new File("events.csv");
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
@@ -86,6 +88,27 @@ public class DataRetriever {
         } catch (IOException e) {
             System.err.println("File not found");
         }
+    }
+    
+    /**
+     * read events from STDIN and fills the event tables given by reference.
+     * Calls handleEvent to handle an event (why am I even writing those comments ?)
+     * @param noteTable
+     * @param weeklyFrequency
+     */
+    public static void loadTableFromSTDin(Note[] noteTable, int[] weeklyFrequency) {
+            // Read from STDin
+            Scanner in = new Scanner(System.in);
+            while (in.hasNextLine()) {
+                    String l = in.nextLine();
+                    String[] event = l.split(",");
+                    handleEvent(event, noteTable, weeklyFrequency);
+            }
+    }
+    
+    public static void loadTable(Note[] noteTable, int[] weeklyFrequency) {
+        //loadTableFromFile(noteTable, weeklyFrequency);
+        loadTableFromSTDin(noteTable, weeklyFrequency);
     }
 
     /**

@@ -1,0 +1,1 @@
+java -jar build/java/SoundsOfCode.jar < events_regular.csv
