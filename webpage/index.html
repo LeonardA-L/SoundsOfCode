@@ -198,6 +198,10 @@
 		visibility: visible;
 	}
 	
+	.hidden{
+		visibility:hidden;
+	}
+	
 	.clickable{
 		background:rgba(0,0,0,0.01);
 		pointer-events:auto !important;
@@ -228,6 +232,8 @@
 		background:url(graphs/beats.png) center center no-repeat;
 		background-size: 100% 110px;
 	}
+	
+	
 	</style>
 	<script src="jquery-1.11.1.min.js"></script>
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
@@ -346,6 +352,10 @@
 		}
 		
 		
+		function toggleVisibility(className){
+			$('.'+className).toggleClass('hidden');
+		}
+		
     </script>
   </head>
   
@@ -363,13 +373,17 @@
 			</div>
 			<div class="comments">
 			
-			<div class="comment" style="left:80%">
+			<div class="comment" style="left:74.2%">
 				<div class="pointer"></div>
-				<div id="cc0" class="comContent hangLeft"> A longer comment that will probably overflow because it is soooo Lorem Ipsum ooh yeah baby</div>
+				<div id="cc0" class="comContent hangLeft"> <b>Beginning September 2013.</b><br />Activity low point, reason unknown. "Back to school" effect ?</div>
 			</div>
-			<div class="comment" style="left:24%">
+			<div class="comment" style="left:25%">
 				<div class="pointer"></div>
-				<div id="cc1" class="comContent"> To help you bear with this calm and empty Autumn 2012, I raise you mozilla's <a href="#">BrowserQuest</a>'s <a href="#">Forktree</a></div>
+				<div id="cc1" class="comContent"> To help you bear with this calm and empty Autumn 2012, I raise you mozilla's BrowserQuest's Forktree (see wiki)</div>
+			</div>
+			<div class="comment" style="left:40%">
+				<div class="pointer"></div>
+				<div id="cc2" class="comContent"> <b>December 24th&nbsp;2012.</b><br />Activity low point. How unexpected.</div>
 			</div>
 			
 			
@@ -381,9 +395,9 @@
 				<div class="graph repos"></div>
 				<div class="graph beats"></div>
 				<div class="graphBtns">
-					<button>Overall Activity</button>
-					<button>Repositories</button>
-					<button>1.4 TB Upload thresholds</button>
+					<button onclick="toggleVisibility('baseline')">Overall Activity</button>
+					<button onclick="toggleVisibility('repos')">Repositories</button>
+					<button onclick="toggleVisibility('beats')">1.4 TB Upload thresholds</button>
 				</div>
 			</div>
 		</div>
@@ -402,26 +416,25 @@
 	</div>
 	</div>
 	<div class="body">
-	<h2>Sounds of Code - <span style="color:#e74c3c	">Press play to start</span></h2>
+	<h2>Sounds of Code - <span style="color:#e74c3c	">Press <span style="cursor:pointer" onclick="toggleAudio(event);">play</span> to start</span></h2>
 	<p>
 	A musical representation of GitHub's activity timeline.<br />
 	... Or at least an attempt to make it musical.
 	</p>
 	<h3>What's that ?</h3>
-	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from data harvested from the <a href="http://www.githubarchive.org/">GitHub Archive</a> timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years. Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
+	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from data harvested from the <a href="http://www.githubarchive.org/">GitHub Archive</a> timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years (2012-03 to 2014-08). Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
 	This project represents as sound, in a chronological order, GitHub. A musical log journal.</p>
 	<h3>It sounds awful</h3>
 	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
-	music. But I tried to make it a little better with a "beautified" version, that fixes at least the problem of the mismatching frequencies. You 
-	can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
+	music. But I tried to make it a little better with a "beautified" version, that fixes at least the problem of the mismatching frequencies. You can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
 	<p class="beautyButtonWrap"></p>
 	<p>And yes, it's still not pleasant to hear.</p>
 	<h3>Is there more about this ?</h3>
-	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was conducted as an entry for the <em>Annual GitHub Data Challenge</em> (<a href="#">2014&nbsp;edition</a>). It thus comes with a nice <a href="#">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and where you can even contribute. 
-	You can get lots of information on the <a href="#">project's wiki</a> too, such as long and boring texts explaining what exactly the elements featured in the music represent, instructions to make your very own version and cool links to cool stuff.<br />
+	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was conducted as an entry for the <em>Annual GitHub Data Challenge</em> (<a href="https://github.com/blog/1864-third-annual-github-data-challenge">2014&nbsp;edition</a>). It thus comes with a nice <a href="https://github.com/LeonardA-L/theUndyingCarpetAndHisDog/">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and where you can even contribute. 
+	You can get lots of information on the <a href="https://github.com/LeonardA-L/theUndyingCarpetAndHisDog/wiki/">project's wiki</a> too, such as long and boring texts explaining what exactly the elements featured in the music represent, instructions to make your very own version and cool links to cool stuff.<br />
 	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out the work of the other contestants :)</p>
 	</div>
-	<div class="footer">A project by <a href="#">LeonardA-L</a></div>
+	<div class="footer">A project by <a href=https://github.com/LeonardA-L/">LeonardA-L</a></div>
   </body>
 
 </html>

@@ -17,6 +17,15 @@ To learn about the project you can :
 * Get the data mining spreadsheet
 * Check out the project's wiki page where you can get use[ful|less] information about the project, the elements in it and DIY instructions
 
+## Quick start
+
+```
+git clone https://github.com/LeonardA-L/theUndyingCarpetAndHisDog.git
+cd theUndyingCarpetAndHisDog
+./build.sh
+./run.sh
+```
+
 ****
 
 Any comment, contribution, question, feedback is welcome. Pull resquests, issues, you know how it works.
