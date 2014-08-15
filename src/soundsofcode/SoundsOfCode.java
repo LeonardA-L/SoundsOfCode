@@ -169,7 +169,7 @@ public class SoundsOfCode {
         synth.start();
         
         // Initialize output to the wav file
-        File waveFile = new File( "SoundsOfCode_recording.wav" );
+        File waveFile = new File( "build/SoundsOfCode_recording.wav" );
         try {
             fileOut = new WaveRecorder( synth, waveFile );
         } catch (FileNotFoundException e) {

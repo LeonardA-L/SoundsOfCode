@@ -218,15 +218,15 @@
 	
 	.baseline{
 		background:url(graphs/baseline.png) center center no-repeat;
-		background-size: 100% 90px;
+		background-size: 100% 110px;
 	}
 	.repos{
 		background:url(graphs/repos.png) center center no-repeat;
-		background-size: 100% 90px;
+		background-size: 100% 110px;
 	}
 	.beats{
 		background:url(graphs/beats.png) center center no-repeat;
-		background-size: 100% 90px;
+		background-size: 100% 110px;
 	}
 	</style>
 	<script src="jquery-1.11.1.min.js"></script>
@@ -246,14 +246,6 @@
 		var comments = window.document.getElementsByClassName('pointer');
 		
 		var comContents;
-		//visibility:visible;
-		var callTimeOutOnToolTip = function(element){
-			setTimeout(function(){
-				if(element.style.display === 'inline-block'){
-					element.style.display="none";
-				}
-			},4000);
-		};
 		
 		setTimeout(function(){
 			
@@ -416,23 +408,18 @@
 	... Or at least an attempt to make it musical.
 	</p>
 	<h3>What's that ?</h3>
-	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from 
-	data harvested from the GitHub Archive timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years. 
-	Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
+	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from data harvested from the <a href="http://www.githubarchive.org/">GitHub Archive</a> timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years. Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
 	This project represents as sound, in a chronological order, GitHub. A musical log journal.</p>
 	<h3>It sounds awful</h3>
 	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
-	music. But I tried to make it a little better with a "beautified" version, that at least fixes the problem of the mismatching frequencies. You 
+	music. But I tried to make it a little better with a "beautified" version, that fixes at least the problem of the mismatching frequencies. You 
 	can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
 	<p class="beautyButtonWrap"></p>
 	<p>And yes, it's still not pleasant to hear.</p>
 	<h3>Is there more about this ?</h3>
-	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was done as an entry for the Annual GitHub Data Challenge 
-	(2014&nbsp;edition). It thus comes with a nice <a href="#">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and even contribute. 
-	You can get lots of information on the <a href="#">project's wiki</a>, like long and boring texts explaining what exactly the elements in the music 
-	represent, instructions to do your very own version and cool links to cool stuff.<br />
-	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out what the other participants to the 
-	challenge did :)</p>
+	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was conducted as an entry for the <em>Annual GitHub Data Challenge</em> (<a href="#">2014&nbsp;edition</a>). It thus comes with a nice <a href="#">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and where you can even contribute. 
+	You can get lots of information on the <a href="#">project's wiki</a> too, such as long and boring texts explaining what exactly the elements featured in the music represent, instructions to make your very own version and cool links to cool stuff.<br />
+	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out the work of the other contestants :)</p>
 	</div>
 	<div class="footer">A project by <a href="#">LeonardA-L</a></div>
   </body>
