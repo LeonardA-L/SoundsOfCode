@@ -44,24 +44,6 @@ public class DataRetriever {
         }
     }
 
-    /*
-     // This method was a temporary table builder used before the actual file loading system was coded.
-    public static Note[] temporaryTableBuilder() {
-        SegmentedEnvelope enveloppe = TheUndyingCarpet.enveloppes.get("basic");
-        // Temp : building the note table
-
-        addNote(0, new Note(300, enveloppe, TheUndyingCarpet.oscillators.get("repoInstrument")));
-        addNote(0, new Sample("Beat.wav"));
-        addNote(50, new Note(200, enveloppe, TheUndyingCarpet.oscillators.get("repoInstrument")));
-        addNote(100, new Sample("Beat.wav"));
-        addNote(100, new Note(400, enveloppe, TheUndyingCarpet.oscillators.get("repoInstrument")));
-        addNote(150, new Note(400, enveloppe, TheUndyingCarpet.oscillators.get("repoInstrument")));
-        addNote(200, new Sample("Beat.wav"));
-        addNote(200, new Note(300, enveloppe, TheUndyingCarpet.oscillators.get("repoInstrument")));
-
-        return noteTable;
-    }
-*/
 
     /**
      * Loads the event CSV file and fills the event tables given by reference.

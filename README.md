@@ -20,8 +20,8 @@ To learn about the project you can :
 ## Quick start
 
 ```
-git clone https://github.com/LeonardA-L/theUndyingCarpetAndHisDog.git
-cd theUndyingCarpetAndHisDog
+git clone https://github.com/LeonardA-L/SoundsOfCode.git
+cd SoundsOfCode
 ./build.sh
 ./run.sh
 ```
