@@ -20,6 +20,7 @@ public class ForkTree {
 
     Node root;
     int depth;
+    String parent;
 
     public ForkTree() {
 
@@ -46,9 +47,11 @@ public class ForkTree {
         if (root == null) {
             root = new Node();
             root.id = forked;
+            /*
             Node n = new Node();
             n.id = forker;
             root.addNode(n);
+            */
         } else {
             Node n = searchFor(forked, root);
             Node o = new Node();
@@ -86,6 +89,24 @@ public class ForkTree {
         }
         depth--;
     }
+    
+    public void displayDepth(Node n) {
+        //list.add(depth);
+        //System.out.println(""+depth);
+        String formerParent = null;
+        if(parent != null){
+            formerParent = parent;
+            System.out.println(""+depth+","+parent+" -> "+n.id);
+        }
+        parent = n.id;
+        for (int i = 0; i < n.children.size(); i++) {
+            depth++;
+            displayDepth(n.children.get(i));
+            //list.add(depth);
+        }
+        depth--;
+        parent = formerParent;
+    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -95,21 +116,34 @@ public class ForkTree {
             if (!(s.equals("") || s.equals("}") || s.equals("digraph{"))) {
                 String[] ss = s.split(" -> ");
                 //System.out.println(s);
-                ft.addFork(ss[1].replaceAll("[0-9]", "").replaceAll("-", ""), ss[0].replaceAll("[0-9]", "").replaceAll("-", ""));
+                if(ss.length > 1){
+                 ft.addFork(ss[1].replaceAll("[0-9]", "").replaceAll("-", ""), ss[0].replaceAll("[0-9]", "").replaceAll("-", ""));
+                }
+                
             }
         }
         ArrayList<Integer> depths = new ArrayList<Integer>();
         ft.depth = 0;
-        ft.addDepth(ft.root,depths);
+        //ft.displayDepth(ft.root);
+        depths = new ArrayList<Integer>();
+        ft.addDepth(ft.root, depths);
         
-        /*
-        System.out.println("TreeDepth");
-        for(int i=0;i<depths.size();i++){
+        //--------------
+        // Block 1
+        for(int i =0;i<depths.size();i++){
             System.out.println(depths.get(i));
         }
-        */
+        //--------------
+        
+        // uncomment this block and comment the other one to output a .dot formatted tree
+        
+        /*
+        //--------------
+        // Block 2
         System.out.println("digraph{");
         ft.display(ft.root);
         System.out.println("}");
+        //--------------
+        */
     }
 }

@@ -24,7 +24,7 @@ public class SampleThread implements Runnable {
         // Create en connect an amplitude variator according to the right enveloppe
         VariableRateMonoReader samplePlayer = new VariableRateMonoReader();
         samplePlayer.dataQueue.queue( sample, 0, sample.getNumFrames() );
-        samplePlayer.amplitude.set(0.7);
+        samplePlayer.amplitude.set(0.50);
         
         // Add the sample player to the Sound System
         SoundsOfCode.synth.add(samplePlayer);

@@ -45,6 +45,10 @@ public class SoundsOfCode {
         BASELINE
     }
     
+    /*
+     * You'll see 10 everywhere. It was originally intended to be 10ms/step, but the whole music was just too long 
+     * and boring (5min+) so I put some speed in that
+     */
     public static final long clockStepInMs = 6;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
     public static final long totalDurationMs = (long)(((double)clockStepInMs/10)*300000);
@@ -137,7 +141,7 @@ public class SoundsOfCode {
             // Jsyn has its own wav loading system. How convenient. Thanks Jsyn
             sample = SampleLoader.loadFloatSample(file);
         } catch (IOException e) {
-            System.err.println("Error while loading file");
+            System.err.println("Error while loading file "+fileName);
         }
         samples.put(fileName, sample);
     }
