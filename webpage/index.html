@@ -382,7 +382,7 @@
 			<div class="comments">
 			<div class="comment" style="left:23%">
 				<div class="pointer"></div>
-				<div class="comContent"> <b>Week of August 20th 2012</b>.<br /><span class="commentTextDesc">Huge activity peak. Reason unknown (yet)</span></div>
+				<div class="comContent"> <b>Week of August 20th 2012</b>.<br /><span class="commentTextDesc">Huge activity peak. Reason unknown (yet).</span></div>
 			</div>
 			<div class="comment" style="left:17.2%">
 				<div class="pointer"></div>
@@ -391,7 +391,7 @@
 			
 			<div class="comment" style="left:25.2%">
 				<div class="pointer"></div>
-				<div class="comContent"> <b>Fork Tree</b><br /><span class="commentTextDesc">Beginning Autumn 2012, activity is disrupted, due to a "major service outage" at GitHub. Short, fortunately, but the following season being rather calm, I raise you mozilla's BrowserQuest's Forktree (see wiki)</span></div>
+				<div class="comContent"> <b>Fork Tree</b><br /><span class="commentTextDesc">Beginning Autumn 2012, activity is disrupted, due to a "major service outage" at GitHub. Short, fortunately, but the following season being rather calm, I raise you cocos2d's <b>cocos2d-x</b>'s Forktree (see wiki)</span></div>
 			</div>
 			<div class="comment" style="left:40%">
 				<div class="pointer"></div>
@@ -413,6 +413,12 @@
 				<div class="pointer"></div>
 				<div class="comContent hangLeft"> <b>Spring 2014 repository hatching.</b><br /><span class="commentTextDesc"></span></div>
 			</div>
+			<div class="comment" style="left:54.3%">
+				<div class="pointer"></div>
+				<div class="comContent hangLeft"> <b>Fork Tree</b><br /><span class="commentTextDesc">Again a calm season, let's listen to gabrielecirulli's <b>2048</b>'s Fork tree.</span></div>
+			</div>
+			
+			
 			
 			</div>
 			<div id="graphsVisualizer" class="lengthSelector graphVisu">
@@ -443,7 +449,7 @@
 	</div>
 	</div>
 	<div class="body">
-	<h2>Sounds of Code - <span style="color:#e74c3c	">Press <span style="cursor:pointer" onclick="toggleAudio(event);">play</span> to start</span></h2>
+	<h2>Sounds of Code - <span style="color:#e74c3c	">Press <span style="cursor:pointer" onclick="console.log('you really had to click on the word, didn\'t you.'); toggleAudio(event);">play</span> to start</span></h2>
 	<p>
 	A musical representation of GitHub's activity timeline.<br />
 	... Or at least an attempt to make it musical.
@@ -451,16 +457,19 @@
 	<h3>What's that ?</h3>
 	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from data harvested from the <a href="http://www.githubarchive.org/">GitHub Archive</a> timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years (2012-03 to 2014-08). Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
 	This project represents as sound, in a chronological order, GitHub. A musical log journal.</p>
-	<p>Don't forget to click on the green button in the menu bar (up right) to activate the graphs showing corresponding data in a more traditionnal way.</p>
+	<p>Don't forget to click on the green button in the menu bar (up right) to activate the graphs showing corresponding data in a more traditionnal way. Unfortunately, they go quickly out of sync because of the music generation lag.</p>
 	<h3>It sounds awful</h3>
 	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
-	music. But I tried to make it a little better with a "beautified" version, that fixes at least the problem of the mismatching frequencies. You can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
+	music. But I tried to make it a little better with a "beautified" version, that fixesthe problem of the mismatching frequencies, and allows events to occur at a less random time. Although this version is less accurate regarding the data it represents. You can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
 	<p class="beautyButtonWrap"></p>
 	<p>And yes, it's still not pleasant to hear.</p>
+	<h3>Explain, Explain !</h3>
+	<p>You'll find plenty of explanation and other info on the <a href="https://github.com/LeonardA-L/SoundsOfCode/wiki/">project's wiki</a>, but for now, imagine that the baseline you here in the background represents the overall GitHub activity (the higher the pitch, the higher the activity). Each beep you here represents an active repository's creation date (with a limit of 400 repositories), and the beats occur when an amount of 1.4 TB of data is uploaded to GitHub.</p>
+	<p>As of the parts labelled as "Fork Trees" they represent a traversal (Depth-First) of a tree where each branch is a fork. The names entered as comments are the names of the root repositories.</p>
 	<h3>Is there more about this ?</h3>
 	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was conducted as an entry for the <em>Annual GitHub Data Challenge</em> (<a href="https://github.com/blog/1864-third-annual-github-data-challenge">2014&nbsp;edition</a>). It thus comes with a nice <a href="https://github.com/LeonardA-L/SoundsOfCode/">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and where you can even contribute. 
 	You can get lots of information on the <a href="https://github.com/LeonardA-L/SoundsOfCode/wiki/">project's wiki</a> too, such as long and boring texts explaining what exactly the elements featured in the music represent, instructions to make your very own version and cool links to cool stuff.<br />
-	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out the work of the other contestants&nbsp;:)</p>
+	There's a lot of things to do if this project interrests you. If it doesn't, well you can still check out the work of the other contestants, there's some great stuff to see&nbsp;:)</p>
 	</div>
 	<div class="footer">A project by <a href="https://github.com/LeonardA-L/">LeonardA-L</a>, thanks to the inspiration of <a href="https://github.com/chickentuna">Chickentuna</a></div>
   </body>
