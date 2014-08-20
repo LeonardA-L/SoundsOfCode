@@ -200,11 +200,11 @@
 	}
 	
 	.displayed{
-		visibility: visible;
+		visibility: visible !important;
 	}
 	
 	.hidden{
-		visibility:hidden;
+		visibility:hidden !important;
 	}
 	
 	.clickable{
@@ -236,6 +236,10 @@
 	.beats{
 		background:url(graphs/beats.png) center center no-repeat;
 		background-size: 100% 110px;
+	}
+	.spaInqu{
+		background:url(graphs/SpaInqu.png) center center no-repeat;
+		visibility:hidden;
 	}
 	
 	.commentTextDesc{
@@ -359,9 +363,28 @@
 			
 		}
 		
+		var graphs = {
+			"baseline":true,
+			"repos":true,
+			"beats":true,
+		};
+		var spanishInquisitionCount = 0;
+		var spanishThresh = 3;
 		
 		function toggleVisibility(className){
 			$('.'+className).toggleClass('hidden');
+			// NOBODY EXPECTS THE SPANISH INQUISITION toggling
+			graphs[className] = !graphs[className];
+			for(var i in graphs){
+				if(graphs[i]){
+					$('.spaInqu').removeClass('displayed');
+					return;
+				}
+			}
+			spanishInquisitionCount ++;
+			if(spanishInquisitionCount >= spanishThresh){
+				$('.spaInqu').addClass('displayed');
+			}
 		}
 		
     </script>
@@ -386,7 +409,7 @@
 			</div>
 			<div class="comment" style="left:17.2%">
 				<div class="pointer"></div>
-				<div class="comContent"> <b>Week of July 9th 2012</b>.<br /><span class="commentTextDesc">Small activity peak as the PLD-Linux distribution switches from CVS to Git. GitHub user <b>mmazur</b> (PLD-Linux team) realizes alone 18% of the entire GitHub activity this week.</span></div>
+				<div class="comContent"> <b>Week of July 9th 2012</b>.<br /><span class="commentTextDesc">Small activity peak as the PLD-Linux distribution switches from CVS to Git. GitHub user <b>mmazur</b> (PLD-Linux team) realizes alone 18% of the entire GitHub activity that week.</span></div>
 			</div>
 			
 			<div class="comment" style="left:25.2%">
@@ -415,7 +438,7 @@
 			</div>
 			<div class="comment" style="left:54.3%">
 				<div class="pointer"></div>
-				<div class="comContent hangLeft"> <b>Fork Tree</b><br /><span class="commentTextDesc">Again a calm season, let's listen to gabrielecirulli's <b>2048</b>'s Fork tree.</span></div>
+				<div class="comContent hangLeft"> <b>Fork Tree</b><br /><span class="commentTextDesc">Again a calm season, let's listen to gabrielecirulli's <b>2048</b>'s Fork tree.<br />For more information on Fork Trees, see the project's wiki.</span></div>
 			</div>
 			
 			
@@ -427,6 +450,8 @@
 				<div class="graph baseline"></div>
 				<div class="graph repos"></div>
 				<div class="graph beats"></div>
+				<div id="spaInqu" class="graph spaInqu"></div>
+				
 				<div class="graphBtns">
 					<button onclick="toggleVisibility('baseline')">Overall Activity</button>
 					<button onclick="toggleVisibility('repos')">Repositories</button>
@@ -455,17 +480,17 @@
 	... Or at least an attempt to make it musical.
 	</p>
 	<h3>What's that ?</h3>
-	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from data harvested from the <a href="http://www.githubarchive.org/">GitHub Archive</a> timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years (2012-03 to 2014-08). Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
+	<p>This is the sound of people committing, pushing, starring, forking, and more if you listen closely. This music was directly generated from data harvested from the <a href="http://www.githubarchive.org/">GitHub Archive</a> timeline. Each sound corresponds to a specific event occurring on the GitHub platform for the last two years (<em>2012-03</em> to <em>2014-08</em>). Those elements represent the overall GitHub activity, repositories being created, file uploads, and forks.<br />
 	This project represents as sound, in a chronological order, GitHub. A musical log journal.</p>
-	<p>Don't forget to click on the green button in the menu bar (up right) to activate the graphs showing corresponding data in a more traditionnal way. Unfortunately, they go quickly out of sync because of the music generation lag.</p>
+	<p>Don't forget to click on the green button in the menu bar (up right) to activate the graphs showing corresponding data in a more traditionnal way. Unfortunately, they go out of sync at the end because of a music generation delay problem, sorry about that.</p>
 	<h3>It sounds awful</h3>
 	<p>Indeed. Randomly occurring events with random chaotic frequencies (that are proportional to the actual frequencies of events) never made good 
-	music. But I tried to make it a little better with a "beautified" version, that fixesthe problem of the mismatching frequencies, and allows events to occur at a less random time. Although this version is less accurate regarding the data it represents. You can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
+	music. But I tried to make it a little better with a "beautified" version, that fixes the problem of mismatching frequencies, and allows events to occur at a less random time. However, this version is less accurate regarding the data it represents. You can play it right now on this very page by clicking on this button : <span style="margin-left:0; height:30px; margin-bottom:-10px;" class="button btnB" id="beautif" onclick="toggleMp3()"></span></p>
 	<p class="beautyButtonWrap"></p>
-	<p>And yes, it's still not pleasant to hear.</p>
+	<p>And no, it's still not pleasant to hear.</p>
 	<h3>Explain, Explain !</h3>
-	<p>You'll find plenty of explanation and other info on the <a href="https://github.com/LeonardA-L/SoundsOfCode/wiki/">project's wiki</a>, but for now, imagine that the baseline you here in the background represents the overall GitHub activity (the higher the pitch, the higher the activity). Each beep you here represents an active repository's creation date (with a limit of 400 repositories), and the beats occur when an amount of 1.4 TB of data is uploaded to GitHub.</p>
-	<p>As of the parts labelled as "Fork Trees" they represent a traversal (Depth-First) of a tree where each branch is a fork. The names entered as comments are the names of the root repositories.</p>
+	<p>You'll find plenty of explanation and other info on the <a href="https://github.com/LeonardA-L/SoundsOfCode/wiki/">project's wiki</a>, but for now, imagine that the <b>baseline</b> you hear in the background represents the overall GitHub activity (the higher the pitch, the higher the activity). Each <b>beep</b> you hear represents an active repository's creation date (with a limit of 400 repositories), and the <b>beats</b> occur when an amount of 1.4 TB of data is uploaded to GitHub.</p>
+	<p>As of the parts labelled as "<b>Fork Trees</b>" they represent a traversal (Depth-First) of a tree where each branch is a fork. The names entered as comments are the names of the root repositories.</p>
 	<h3>Is there more about this ?</h3>
 	<p>I'm glad you ask ;p. There are plenty of things to do/know/hear about this. This project was conducted as an entry for the <em>Annual GitHub Data Challenge</em> (<a href="https://github.com/blog/1864-third-annual-github-data-challenge">2014&nbsp;edition</a>). It thus comes with a nice <a href="https://github.com/LeonardA-L/SoundsOfCode/">repository</a> on GitHub where you can see how the data was harvested, processed, organized, and where you can even contribute. 
 	You can get lots of information on the <a href="https://github.com/LeonardA-L/SoundsOfCode/wiki/">project's wiki</a> too, such as long and boring texts explaining what exactly the elements featured in the music represent, instructions to make your very own version and cool links to cool stuff.<br />
