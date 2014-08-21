@@ -51,7 +51,7 @@ public class SoundsOfCode {
      */
     public static final long clockStepInMs = 6;
     public static final long clockStepInNanos = clockStepInMs * 1000000;
-    public static final long totalDurationMs = (long)(((double)clockStepInMs/10)*300000);
+    public static final long totalDurationMs = (long)(((double)clockStepInMs/10)*300000 + 1000);    // +1s to fix delay issues
     public static final long totalDurationS = totalDurationMs/1000;
     
     /**
@@ -94,6 +94,7 @@ public class SoundsOfCode {
         for(int i=0;i<noteTab.length;i++){
             // One entry in the table is a chained list of note
             a = System.nanoTime();
+            //b = a;
             // So we play each one until there's no note left
             for(Note n = noteTab[i]; n != null; n=n.getNext()){
                 playNote(n);

@@ -1,4 +1,3 @@
-CSV Line
 476,330
 715,523
 954,440
@@ -125,7 +124,6 @@ CSV Line
 29818,440
 29818,392
 29818,392
-CSV Line
 23868,880,basic,Python
 23664,784,basic,null
 3638,784,basic,Perl
@@ -241,7 +239,7 @@ CSV Line
 14620,523,basic,C++
 5882,523,basic,JavaScript
 9452,523,basic,null
-26860,523,basic,JavaScript
+26860,440,basic,JavaScript
 544,440,basic,Objective-C
 25738,440,basic,JavaScript
 14178,440,basic,PHP
@@ -439,7 +437,7 @@ CSV Line
 408,196,basic,C#
 5712,196,basic,C
 5270,196,basic,JavaScript
-30056,196,basic,null
+30056,165,basic,null
 8738,165,basic,null
 18258,165,basic,JavaScript
 16626,165,basic,JavaScript
@@ -528,7 +526,6 @@ CSV Line
 6120,131,basic,JavaScript
 3026,131,basic,JavaScript
 5644,131,basic,JavaScript
-CSV Line
 6620,forkTreeShot_0.wav
 6640,forkTreeShot_1.wav
 6660,forkTreeShot_2.wav
@@ -604,7 +601,6 @@ CSV Line
 8060,forkTreeShot_2.wav
 8080,forkTreeShot_1.wav
 8100,forkTreeShot_0.wav
-CSV Line
 14018,forkTreeShot_0.wav
 14036,forkTreeShot_1.wav
 14054,forkTreeShot_2.wav
@@ -742,7 +738,6 @@ CSV Line
 16430,forkTreeShot_2.wav
 16448,forkTreeShot_1.wav
 16466,forkTreeShot_0.wav
-CSV Line
 238,Beat.wav
 1056,Beat.wav
 2453,Beat.wav

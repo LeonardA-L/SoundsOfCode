@@ -15,7 +15,7 @@
 	.lengthSelector{
 		position:relative;
 		width:100%;
-		background:url(./sound_bg.png) center center no-repeat;
+		background: center center no-repeat;
 		background-size: 100% 90px;
 		height:170px;
 		cursor:pointer;
@@ -257,7 +257,9 @@
         
 		var demo = "soc_demo.mp3";
 		var beautif = "soc_beautified.mp3";
-		
+		setTimeout(function(){
+		$('#songVisualizer').css('background-image','url(./sound_bg.png)');
+		},0);
 		var currentFile = demo;
 		
 		var inited = false;	// I hereby declare inited as being a real word of the english language. Shakespeare style
@@ -294,9 +296,11 @@
 		function toggleMp3(){
 			if(currentFile === demo){
 				currentFile = beautif;
+				$('#songVisualizer').css('background-image','url(./sound_btfy.png)');
 			}
 			else{
 				currentFile = demo;
+				$('#songVisualizer').css('background-image','url(./sound_bg.png)');
 			}
 			launchAudio();
 			var oAudio = document.getElementById('audioTag');
@@ -398,16 +402,16 @@
 			  Get a decent browser
 			</audio>
 		<div class="headerContent">
-			<div id="songVisualizer" class="lengthSelector" onclick="gotoAudio(event)">
+			<div id="songVisualizer" class="lengthSelector soundViz" onclick="gotoAudio(event)">
 			<div class="playingBar"></div>
 			
 			</div>
 			<div class="comments">
-			<div class="comment" style="left:23%">
+			<div class="comment" style="left:22.6%">
 				<div class="pointer"></div>
 				<div class="comContent"> <b>Week of August 20th 2012</b>.<br /><span class="commentTextDesc">Huge activity peak. Reason unknown (yet).</span></div>
 			</div>
-			<div class="comment" style="left:17.2%">
+			<div class="comment" style="left:16.6%">
 				<div class="pointer"></div>
 				<div class="comContent"> <b>Week of July 9th 2012</b>.<br /><span class="commentTextDesc">Small activity peak as the PLD-Linux distribution switches from CVS to Git. GitHub user <b>mmazur</b> (PLD-Linux team) realizes alone 18% of the entire GitHub activity that week.</span></div>
 			</div>
@@ -424,19 +428,15 @@
 				<div class="pointer"></div>
 				<div class="comContent hangLeft"> <b>Week of July 4th 2013.</b><br /><span class="commentTextDesc">Data upload rate accelerates drastically (~3&nbsp;times faster). Reason unknown (yet).</span></div>
 			</div>
-			<div class="comment" style="left:74.2%">
+			<div class="comment" style="left:74.6%">
 				<div class="pointer"></div>
 				<div class="comContent hangLeft"> <b>Beginning September 2013.</b><br /><span class="commentTextDesc">Activity low point, reason unknown. "Back to school" effect ?</span></div>
 			</div>
-			<div class="comment" style="left:88.5%">
+			<div class="comment" style="left:90%">
 				<div class="pointer"></div>
 				<div class="comContent hangLeft"> <b>Christmas season 2013.</b><br /><span class="commentTextDesc">Activity described as "so damn low" by our experts.</span></div>
 			</div>
-			<div class="comment" style="left:96%">
-				<div class="pointer"></div>
-				<div class="comContent hangLeft"> <b>Spring 2014 repository hatching.</b><br /><span class="commentTextDesc"></span></div>
-			</div>
-			<div class="comment" style="left:54.3%">
+			<div class="comment" style="left:54.4%">
 				<div class="pointer"></div>
 				<div class="comContent hangLeft"> <b>Fork Tree</b><br /><span class="commentTextDesc">Again a calm season, let's listen to gabrielecirulli's <b>2048</b>'s Fork tree.<br />For more information on Fork Trees, see the project's wiki.</span></div>
 			</div>
