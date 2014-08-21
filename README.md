@@ -12,10 +12,10 @@ This generates a musical log journal of GitHub activity.
 
 To learn about the project you can :
 
-* **Get to the demonstration website**
-* Get the list of the SQL queries used to harvest data
-* Get the data mining spreadsheet
-* Check out the project's wiki page where you can get use[ful|less] information about the project, the elements in it and DIY instructions
+* [**Get to the demonstration website**](http://leonarda-l.github.io/SoundsOfCode)
+* Get the list of the SQL [queries](https://github.com/LeonardA-L/SoundsOfCode/blob/master/queries.sql) used to harvest data
+* Get the [data mining spreadsheet](https://github.com/LeonardA-L/SoundsOfCode/blob/master/data/MadDataMiningSheet.ods)
+* Check out the [project's wiki](https://github.com/LeonardA-L/SoundsOfCode/wiki) page where you can get use[ful|less] information about the project, the elements in it and DIY instructions
 
 ## Quick start
 
@@ -30,4 +30,4 @@ cd SoundsOfCode
 
 Any comment, contribution, question, feedback is welcome. Pull resquests, issues, you know how it works.
 
-This project is licensed under a MIT license.
+This project is licensed under a [MIT license](https://github.com/LeonardA-L/SoundsOfCode/blob/master/LICENSE).
